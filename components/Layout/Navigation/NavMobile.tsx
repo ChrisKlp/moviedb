@@ -9,7 +9,7 @@ const NavMobile: React.FC<NavMobileProps> = () => {
   return (
     <Flex w="full" h="full" justify="space-around" align="center" p={4}>
       {navItems.map(item => (
-        <NextLink href={item.href}>
+        <NextLink href={item.href} key={item.id}>
           <a>
             <VStack>
               <Icon as={item.icon} w={5} h={5} color="gray.400" />

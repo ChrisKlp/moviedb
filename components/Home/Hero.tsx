@@ -7,7 +7,13 @@ const bgImage =
 
 const Hero: React.FC<HeroProps> = () => {
   return (
-    <Box bgImage={`url('${bgImage}')`} bgSize="cover" p={12} h="110vh">
+    <Box
+      bgImage={`url('${bgImage}')`}
+      bgSize="cover"
+      bgPosition="center"
+      p={12}
+      h="110vh"
+    >
       sdfsd
     </Box>
   );

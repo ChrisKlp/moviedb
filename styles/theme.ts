@@ -11,6 +11,7 @@ export default extendTheme({
   },
   config: {
     initialColorMode: 'dark',
+    useSystemColorMode: false,
   },
   fonts: {
     heading: 'Poppins, sans-serif',

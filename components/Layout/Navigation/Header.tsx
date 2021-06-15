@@ -3,47 +3,41 @@ import { Logo } from 'components/Icons';
 import NextLink from 'next/link';
 import navItems from './navItems';
 
-type HeaderProps = {
-  isTablet: boolean;
-};
-
-const Header: React.FC<HeaderProps> = ({ isTablet }) => {
+const Header: React.FC = () => {
   return (
     <Flex
-      direction={isTablet ? 'column' : 'row'}
+      direction={['row', null, 'column']}
       align="center"
       w="full"
       h="full"
-      py={isTablet ? '6' : '0'}
-      px={isTablet ? '0' : '6'}
+      py={[0, null, 6]}
+      px={[6, null, 0]}
     >
-      <Box mb={isTablet ? '10' : '0'}>
+      <Box mb={[0, null, 10]}>
         <NextLink href="/">
           <a>
             <Icon
               as={Logo}
-              w={isTablet ? '12' : '9'}
-              h={isTablet ? '12' : '9'}
+              w={[9, null, 12]}
+              h={[9, null, 12]}
               color="#56fff1"
             />
           </a>
         </NextLink>
       </Box>
-      {isTablet && (
-        <VStack as="nav" spacing={0}>
-          {navItems.map(item => (
-            <NextLink href={item.href} key={item.id}>
-              <a>
-                <Tooltip label={item.name} placement="right">
-                  <Center w={20} h={20} _hover={{ bg: 'gray.800' }}>
-                    <Icon as={item.icon} w={6} h={6} color="gray.400" />
-                  </Center>
-                </Tooltip>
-              </a>
-            </NextLink>
-          ))}
-        </VStack>
-      )}
+      <VStack as="nav" spacing={0} display={['none', null, 'flex']}>
+        {navItems.map(item => (
+          <NextLink href={item.href} key={item.id}>
+            <a>
+              <Tooltip label={item.name} placement="right">
+                <Center w={20} h={20} _hover={{ bg: 'gray.800' }}>
+                  <Icon as={item.icon} w={6} h={6} color="gray.400" />
+                </Center>
+              </Tooltip>
+            </a>
+          </NextLink>
+        ))}
+      </VStack>
     </Flex>
   );
 };
