@@ -30,7 +30,7 @@ const Header: React.FC = () => {
           <NextLink href={item.href} key={item.id}>
             <a>
               <Tooltip label={item.name} placement="right">
-                <Center w={20} h={20} _hover={{ bg: 'gray.800' }}>
+                <Center w={20} h={20} _hover={{ bg: 'gray.700' }}>
                   <Icon as={item.icon} w={6} h={6} color="gray.400" />
                 </Center>
               </Tooltip>

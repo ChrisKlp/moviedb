@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           top={0}
           left={0}
           position={['static', null, 'sticky']}
-          bg="gray.900"
+          bg="gray.800"
         >
           <Header />
         </Box>
@@ -30,7 +30,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           h={20}
           w="full"
           position="fixed"
-          bg="gray.900"
+          bg="gray.800"
           bottom={0}
           left={0}
         >

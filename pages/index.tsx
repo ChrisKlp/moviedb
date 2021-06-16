@@ -1,20 +1,17 @@
-import { Box, Container } from '@chakra-ui/react';
+import { Box, Spinner } from '@chakra-ui/react';
 import Hero from 'components/Home/Hero';
 import React from 'react';
-import { useQuery } from 'react-query';
+import { useQueries, useQuery } from 'react-query';
 import fetcher from 'utils/fetcher';
 
 const Home: React.FC = () => {
-  // const { isLoading, error, data } = useQuery('movie', () =>
-  //   fetcher('/movie/76341')
-  // );
+  const dataQuery = useQueries([
+    { queryKey: 'trendyAll', queryFn: () => fetcher('/trending/all/week') },
+    { queryKey: 'genresMovie', queryFn: () => fetcher('/genre/movie/list') },
+    { queryKey: 'genresTv', queryFn: () => fetcher('/genre/tv/list') },
+  ]);
 
-  // console.log(data);
-  return (
-    <Box>
-      <Hero />
-    </Box>
-  );
+  return <Box>{/* {isLoading ? <Spinner colorScheme="teal" /> : null} */}</Box>;
 };
 
 export default Home;

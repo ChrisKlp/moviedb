@@ -1,12 +1,12 @@
-import { SearchIcon } from '@chakra-ui/icons';
 import { CinemaIcon, PeopleIcon, TvIcon } from 'components/Icons';
+import { GoSearch } from 'react-icons/go';
 
 export default [
   {
     id: 1,
     name: 'Search',
     href: '/search',
-    icon: SearchIcon,
+    icon: GoSearch,
   },
   {
     id: 2,

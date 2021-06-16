@@ -14,7 +14,7 @@ export default extendTheme({
     useSystemColorMode: false,
   },
   fonts: {
-    heading: 'Poppins, sans-serif',
+    heading: 'Barlow, sans-serif',
     body: 'Manrope, sans-serif',
   },
   components: {
