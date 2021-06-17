@@ -8,7 +8,7 @@ import { useQueries } from 'react-query';
 import { TTrendingAllQuery } from 'types';
 import fetcher from 'lib/fetcher';
 
-const Home: React.FC = () => {
+const HomePage: React.FC = () => {
   const dataQuery = useQueriesTyped([
     { queryKey: 'trendingAll', queryFn: () => fetcher('/trending/all/week') },
     { queryKey: 'genresMovie', queryFn: () => fetcher('/genre/movie/list') },
@@ -38,4 +38,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default HomePage;

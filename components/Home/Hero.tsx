@@ -12,7 +12,7 @@ import _ from 'lodash';
 import React from 'react';
 import { BsDot, BsPlay, BsStarFill } from 'react-icons/bs';
 import { TTrendingAllData } from 'types';
-import { genPosterImage } from 'lib/generateImages';
+import { genBackdropImage } from 'lib/generateImages';
 
 type HeroProps = {
   data: TTrendingAllData;
@@ -24,9 +24,8 @@ type HeroProps = {
 
 const Hero: React.FC<HeroProps> = ({ data, genres }) => {
   const formatOverview =
-    data.overview &&
-    data.overview?.substring(0, Math.min(350, data.overview?.length)) +
-      (data.overview?.length > 350 && '...');
+    data.overview.substring(0, Math.min(350, data.overview.length)) +
+    (data.overview.length > 350 && '...');
 
   const filteredGenres = _.filter(genres, o =>
     _.includes(data.genre_ids, o.id)
@@ -40,7 +39,7 @@ const Hero: React.FC<HeroProps> = ({ data, genres }) => {
       align="center"
       justify="flex-end"
       bgImage={`url('${
-        data.backdrop_path && genPosterImage(data.backdrop_path)
+        data.backdrop_path && genBackdropImage(data.backdrop_path)
       }')`}
       bgSize="cover"
       bgPosition="center"

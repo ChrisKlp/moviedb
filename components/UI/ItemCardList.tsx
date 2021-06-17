@@ -59,6 +59,7 @@ const Trending: React.FC<TrendingProps> = ({ data, heading }) => {
           w={28}
           h="full"
           bgGradient="linear(to-r, rgba(0,0,0,0), gray.900)"
+          pointerEvents="none"
         />
       </Box>
     </Box>
