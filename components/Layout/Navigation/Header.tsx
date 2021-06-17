@@ -5,40 +5,49 @@ import navItems from './navItems';
 
 const Header: React.FC = () => {
   return (
-    <Flex
-      direction={['row', null, 'column']}
-      align="center"
+    <Box
+      as="header"
+      h={[14, null, '100vh']}
+      maxW={['full', null, 20]}
       w="full"
-      h="full"
-      py={[0, null, 6]}
-      px={[6, null, 0]}
+      bg="gray.800"
+      flexShrink={0}
     >
-      <Box mb={[0, null, 10]}>
-        <NextLink href="/">
-          <a>
-            <Icon
-              as={Logo}
-              w={[9, null, 12]}
-              h={[9, null, 12]}
-              color="#56fff1"
-            />
-          </a>
-        </NextLink>
-      </Box>
-      <VStack as="nav" spacing={0} display={['none', null, 'flex']}>
-        {navItems.map(item => (
-          <NextLink href={item.href} key={item.id}>
+      <Flex
+        direction={['row', null, 'column']}
+        align="center"
+        w="full"
+        h="full"
+        py={[0, null, 6]}
+        px={[6, null, 0]}
+      >
+        <Box mb={[0, null, 10]}>
+          <NextLink href="/">
             <a>
-              <Tooltip label={item.name} placement="right">
-                <Center w={20} h={20} _hover={{ bg: 'gray.700' }}>
-                  <Icon as={item.icon} w={6} h={6} color="gray.400" />
-                </Center>
-              </Tooltip>
+              <Icon
+                as={Logo}
+                w={[9, null, 12]}
+                h={[9, null, 12]}
+                color="#56fff1"
+              />
             </a>
           </NextLink>
-        ))}
-      </VStack>
-    </Flex>
+        </Box>
+        <VStack as="nav" spacing={0} display={['none', null, 'flex']}>
+          {navItems.map(item => (
+            <NextLink href={item.href} key={item.id}>
+              <a>
+                <Tooltip label={item.name} placement="right">
+                  <Center w={20} h={20} _hover={{ bg: 'gray.700' }}>
+                    <Icon as={item.icon} w={6} h={6} color="gray.400" />
+                  </Center>
+                </Tooltip>
+              </a>
+            </NextLink>
+          ))}
+        </VStack>
+      </Flex>
+    </Box>
   );
 };
 

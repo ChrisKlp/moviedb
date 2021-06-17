@@ -12,7 +12,7 @@ import _ from 'lodash';
 import React from 'react';
 import { BsDot, BsPlay, BsStarFill } from 'react-icons/bs';
 import { TTrendingAllData } from 'types';
-import { genPosterImage } from 'utils/generateImages';
+import { genPosterImage } from 'lib/generateImages';
 
 type HeroProps = {
   data: TTrendingAllData;
@@ -36,7 +36,7 @@ const Hero: React.FC<HeroProps> = ({ data, genres }) => {
     <Flex
       position="relative"
       p={12}
-      h="xl"
+      h={['calc(100vh - 8.5rem)', null, 'xl']}
       align="center"
       justify="flex-end"
       bgImage={`url('${

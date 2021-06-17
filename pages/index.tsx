@@ -1,12 +1,12 @@
 import { Box, Spinner } from '@chakra-ui/react';
 import Hero from 'components/Home/Hero';
-import Trending from 'components/Home/Trending';
-import { useQueriesTyped } from 'hooks/useQueriesTyped';
+import ItemCardList from 'components/UI/ItemCardList';
+import { useQueriesTyped } from 'lib/useQueriesTyped';
 import _ from 'lodash';
 import React from 'react';
 import { useQueries } from 'react-query';
 import { TTrendingAllQuery } from 'types';
-import fetcher from 'utils/fetcher';
+import fetcher from 'lib/fetcher';
 
 const Home: React.FC = () => {
   const dataQuery = useQueriesTyped([
@@ -28,7 +28,10 @@ const Home: React.FC = () => {
               'id'
             )}
           />
-          <Trending data={dataQuery[0].data.results.slice(1)} />
+          <ItemCardList
+            heading="Trending Today"
+            data={dataQuery[0].data.results.slice(1)}
+          />
         </>
       )}
     </Box>

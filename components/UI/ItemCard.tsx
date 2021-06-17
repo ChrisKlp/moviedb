@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import { BsStarFill } from 'react-icons/bs';
 import { TTrendingAllData } from 'types';
-import { genPosterImage } from 'utils/generateImages';
+import { genPosterImage } from 'lib/generateImages';
 
 type ItemCardProps = {
   data: TTrendingAllData;
@@ -18,7 +18,7 @@ type ItemCardProps = {
 
 const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
   return (
-    <VStack align="flex-start" spacing={1} maxW="25vw">
+    <VStack align="flex-start" spacing={1} minW={40} w="full">
       <Box
         bg="gray.700"
         bgImage={`url('${
