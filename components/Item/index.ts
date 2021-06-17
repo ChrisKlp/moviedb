@@ -1,1 +1,1 @@
-export { default as ItemHero } from 'components/Item/ItemHero';
+export { default as ItemHeader } from 'components/Item/ItemHeader';

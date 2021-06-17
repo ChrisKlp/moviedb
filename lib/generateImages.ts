@@ -25,3 +25,14 @@ export const genPosterImage = (path: string, size?: string): string => {
       return `${baseUrl}original${path}`;
   }
 };
+
+export const genProfileImage = (path: string, size?: string): string => {
+  switch (size) {
+    case 'sm':
+      return `${baseUrl}w185${path}`;
+    case 'md':
+      return `${baseUrl}h632${path}`;
+    default:
+      return `${baseUrl}original${path}`;
+  }
+};
