@@ -9,11 +9,12 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { BsStarFill } from 'react-icons/bs';
-import { TTrendingAllData } from 'types';
 import { genPosterImage } from 'lib/generateImages';
+import { TMovieItem } from 'types/movieTypes';
+import { TTvItem } from 'types/tvTypes';
 
 type ItemCardProps = {
-  data: TTrendingAllData;
+  data: TMovieItem & TTvItem;
 };
 
 const ItemCard: React.FC<ItemCardProps> = ({ data }) => {

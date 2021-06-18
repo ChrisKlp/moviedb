@@ -20,14 +20,16 @@ import {
   BsLink45Deg,
   BsPlay,
 } from 'react-icons/bs';
-import { TSingleMovie, TSingleTV } from 'types';
 import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
+import { TSingleMovie } from 'types/movieTypes';
+import { TSingleTV } from 'types/tvTypes';
 
 type ItemHeaderProps = {
   data: TSingleMovie & TSingleTV;
+  tvHeader?: boolean;
 };
 
-const ItemHeader: React.FC<ItemHeaderProps> = ({ data }) => {
+const ItemHeader: React.FC<ItemHeaderProps> = ({ data, tvHeader }) => {
   return (
     <Flex
       position="relative"
@@ -86,8 +88,8 @@ const ItemHeader: React.FC<ItemHeaderProps> = ({ data }) => {
                 display="inline-block"
               >
                 (
-                {data.release_date.substring(0, 4) ||
-                  data.first_air_date.substring(0, 4)}
+                {data.release_date?.substring(0, 4) ||
+                  data.first_air_date?.substring(0, 4)}
                 )
               </Heading>
             </Heading>
@@ -106,12 +108,16 @@ const ItemHeader: React.FC<ItemHeaderProps> = ({ data }) => {
                 </Text>
               </HStack>
               <Icon as={BsDot} color="gray.300" />
-              <HStack>
-                <Icon as={BsClockFill} w={4} h={4} color="gray.300" />
-                <Text fontSize="sm" color="gray.300">
-                  {`${Math.floor(data.runtime / 60)}h ${data.runtime % 60}min`}
-                </Text>
-              </HStack>
+              {!tvHeader && (
+                <HStack>
+                  <Icon as={BsClockFill} w={4} h={4} color="gray.300" />
+                  <Text fontSize="sm" color="gray.300">
+                    {`${Math.floor(data.runtime / 60)}h ${
+                      data.runtime % 60
+                    }min`}
+                  </Text>
+                </HStack>
+              )}
             </HStack>
             <Text fontStyle="oblique" color="teal.300" mb={2}>
               {data.tagline}

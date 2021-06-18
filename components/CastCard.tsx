@@ -1,9 +1,7 @@
-import {
-  Box, Text, VStack
-} from '@chakra-ui/react';
+import { Box, Text, VStack } from '@chakra-ui/react';
 import { genProfileImage } from 'lib/generateImages';
 import React from 'react';
-import { TCast } from 'types';
+import { TCast } from 'types/castTypes';
 
 type CastCardProps = {
   data: TCast;

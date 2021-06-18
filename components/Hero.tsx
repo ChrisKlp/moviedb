@@ -11,11 +11,13 @@ import {
 import _ from 'lodash';
 import React from 'react';
 import { BsDot, BsPlay, BsStarFill } from 'react-icons/bs';
-import { TTrendingAllData } from 'types';
 import { genBackdropImage } from 'lib/generateImages';
+import Link from 'next/link';
+import { TMovieItem } from 'types/movieTypes';
+import { TTvItem } from 'types/tvTypes';
 
 type HeroProps = {
-  data: TTrendingAllData;
+  data: TMovieItem & TTvItem;
   genres: {
     id: number;
     name: string;
@@ -74,9 +76,11 @@ const Hero: React.FC<HeroProps> = ({ data, genres }) => {
           {formatOverview}
         </Text>
         <HStack>
-          <Button colorScheme="teal" rounded="full">
-            View more
-          </Button>
+          <Link href={`/${data.media_type}/${data.id}`} passHref>
+            <Button as="a" colorScheme="teal" rounded="full">
+              View more
+            </Button>
+          </Link>
           <Button
             colorScheme="teal"
             rounded="full"

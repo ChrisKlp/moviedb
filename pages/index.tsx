@@ -1,12 +1,10 @@
+import React from 'react';
 import { Box, Spinner } from '@chakra-ui/react';
-import Hero from 'components/Home/Hero';
-import ItemCardList from 'components/UI/ItemCardList';
+import Hero from 'components/Hero';
+import fetcher from 'lib/fetcher';
 import { useQueriesTyped } from 'lib/useQueriesTyped';
 import _ from 'lodash';
-import React from 'react';
-import { useQueries } from 'react-query';
-import { TTrendingAllQuery } from 'types';
-import fetcher from 'lib/fetcher';
+import { ItemCardList } from 'components';
 
 const HomePage: React.FC = () => {
   const dataQuery = useQueriesTyped([

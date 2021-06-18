@@ -2,8 +2,8 @@ import type { AppContext, AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from 'styles/theme';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import Layout from 'components/Layout/Layout';
 import { NextRouter } from 'next/dist/client/router';
+import { Layout } from 'components';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const queryClient = new QueryClient();

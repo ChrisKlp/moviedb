@@ -1,25 +1,25 @@
 import React from 'react';
 import { Container, Spinner } from '@chakra-ui/react';
+import { SinglePageHeader, CastCardList } from 'components';
 import fetcher from 'lib/fetcher';
 import { useQueriesTyped } from 'lib/useQueriesTyped';
 import _ from 'lodash';
-import { SinglePageHeader, CastCardList } from 'components';
 
-type SingleMoviePageProps = {
+type SingleTvPageProps = {
   query: {
     id: string;
   };
 };
 
-const SingleMoviePage = ({ query }: SingleMoviePageProps) => {
+const SingleTvPage = ({ query }: SingleTvPageProps) => {
   const dataQuery = useQueriesTyped([
     {
-      queryKey: `movie${query.id}`,
-      queryFn: () => fetcher(`/movie/${query.id}`),
+      queryKey: `tv${query.id}`,
+      queryFn: () => fetcher(`/tv/${query.id}`),
     },
     {
-      queryKey: `movieCredits${query.id}`,
-      queryFn: () => fetcher(`/movie/${query.id}/credits`),
+      queryKey: `tvCredits${query.id}`,
+      queryFn: () => fetcher(`/tv/${query.id}/credits`),
     },
   ]);
 
@@ -27,10 +27,11 @@ const SingleMoviePage = ({ query }: SingleMoviePageProps) => {
     return <Spinner colorScheme="teal" />;
 
   console.log(_.filter(dataQuery[1].data.crew, { job: 'Screenplay' }));
+  console.log(dataQuery);
 
   return (
     <>
-      <SinglePageHeader data={dataQuery[0].data} />
+      <SinglePageHeader data={dataQuery[0].data} tvHeader />
       <Container>
         <CastCardList
           heading="Cast"
@@ -41,4 +42,4 @@ const SingleMoviePage = ({ query }: SingleMoviePageProps) => {
   );
 };
 
-export default SingleMoviePage;
+export default SingleTvPage;

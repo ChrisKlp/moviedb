@@ -1,15 +1,16 @@
 import { Box, Heading, HStack } from '@chakra-ui/react';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
-import { TCast } from 'types';
-import CastCard from './CastCard';
+import { TMovieItem } from 'types/movieTypes';
+import { TTvItem } from 'types/tvTypes';
+import ItemCard from './ItemCard';
 
-type CastCardListProps = {
-  data: TCast[];
+type ItemCardListProps = {
+  data: TMovieItem[] & TTvItem[];
   heading: string;
 };
 
-const CastCardList: React.FC<CastCardListProps> = ({ data, heading }) => {
+const ItemCardList: React.FC<ItemCardListProps> = ({ data, heading }) => {
   const [isScrollEnd, setIsScrollEnd] = useState(false);
   const listRef = useRef<HTMLDivElement | null>(null);
 
@@ -27,7 +28,7 @@ const CastCardList: React.FC<CastCardListProps> = ({ data, heading }) => {
   }, []);
 
   return (
-    <Box py={8}>
+    <Box p={8}>
       <Heading fontSize="xl" fontWeight="semibold" color="teal.300" mb={6}>
         {heading}
       </Heading>
@@ -40,9 +41,9 @@ const CastCardList: React.FC<CastCardListProps> = ({ data, heading }) => {
           pb={8}
         >
           {data.map(item => (
-            <Link href={`/person/${item.id}`} key={item.id}>
+            <Link href={`/${item.media_type}/${item.id}`} key={item.id}>
               <a>
-                <CastCard data={item} />
+                <ItemCard data={item} />
               </a>
             </Link>
           ))}
@@ -66,4 +67,4 @@ const CastCardList: React.FC<CastCardListProps> = ({ data, heading }) => {
   );
 };
 
-export default CastCardList;
+export default ItemCardList;
