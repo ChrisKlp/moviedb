@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Spinner } from '@chakra-ui/react';
+import { Container, Skeleton, Spinner } from '@chakra-ui/react';
 import fetcher from 'lib/fetcher';
 import { useQueriesTyped } from 'lib/useQueriesTyped';
 import _ from 'lodash';
@@ -23,19 +23,22 @@ const SingleMoviePage = ({ query }: SingleMoviePageProps) => {
     },
   ]);
 
-  if (dataQuery.some(query => query.isLoading))
-    return <Spinner colorScheme="teal" />;
-
-  console.log(_.filter(dataQuery[1].data.crew, { job: 'Screenplay' }));
+  // console.log(_.filter(dataQuery[1].data.crew, { job: 'Screenplay' }));
 
   return (
     <>
-      <SinglePageHeader data={dataQuery[0].data} />
+      <Skeleton isLoaded={dataQuery[0].status === 'success'}>
+        {dataQuery[0].data && <SinglePageHeader data={dataQuery[0].data} />}
+      </Skeleton>
       <Container>
-        <CastCardList
-          heading="Cast"
-          data={dataQuery[1].data.cast.slice(0, 15)}
-        />
+        <Skeleton isLoaded={dataQuery[1].status === 'success'}>
+          {dataQuery[1].data && (
+            <CastCardList
+              heading="Cast"
+              data={dataQuery[1].data.cast.slice(0, 15)}
+            />
+          )}
+        </Skeleton>
       </Container>
     </>
   );

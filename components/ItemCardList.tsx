@@ -5,8 +5,10 @@ import { TMovieItem } from 'types/movieTypes';
 import { TTvItem } from 'types/tvTypes';
 import ItemCard from './ItemCard';
 
+type TTrendingAll = TMovieItem & TTvItem;
+
 type ItemCardListProps = {
-  data: TMovieItem[] & TTvItem[];
+  data: TTrendingAll[];
   heading: string;
 };
 
@@ -28,7 +30,7 @@ const ItemCardList: React.FC<ItemCardListProps> = ({ data, heading }) => {
   }, []);
 
   return (
-    <Box p={8}>
+    <Box py={8}>
       <Heading fontSize="xl" fontWeight="semibold" color="teal.300" mb={6}>
         {heading}
       </Heading>

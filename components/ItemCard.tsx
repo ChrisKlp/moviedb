@@ -1,15 +1,7 @@
-import {
-  Box,
-  Heading,
-  VStack,
-  Text,
-  Flex,
-  HStack,
-  Icon,
-} from '@chakra-ui/react';
+import { Box, Flex, HStack, Icon, Text, VStack } from '@chakra-ui/react';
+import { genPosterImage } from 'lib/generateImages';
 import React from 'react';
 import { BsStarFill } from 'react-icons/bs';
-import { genPosterImage } from 'lib/generateImages';
 import { TMovieItem } from 'types/movieTypes';
 import { TTvItem } from 'types/tvTypes';
 
@@ -18,13 +10,13 @@ type ItemCardProps = {
 };
 
 const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
+  const bgImage = data.poster_path && genPosterImage(data.poster_path, 'sm');
+
   return (
-    <VStack align="flex-start" spacing={1} minW={40} w="full">
+    <VStack align="flex-start" spacing={1} w={40}>
       <Box
         bg="gray.700"
-        bgImage={`url('${
-          data.poster_path && genPosterImage(data.poster_path, 'sm')
-        }')`}
+        bgImage={`url('${bgImage}')`}
         bgSize="cover"
         bgPosition="center"
         rounded="md"

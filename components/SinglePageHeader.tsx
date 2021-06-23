@@ -1,26 +1,26 @@
 import {
   Box,
+  Button,
+  Container,
   Flex,
   Heading,
   HStack,
   Icon,
+  IconButton,
   Tag,
   Text,
-  Container,
-  IconButton,
   Tooltip,
-  Button,
 } from '@chakra-ui/react';
 import { genBackdropImage, genPosterImage } from 'lib/generateImages';
 import React from 'react';
 import {
-  BsStarFill,
-  BsDot,
   BsClockFill,
+  BsDot,
   BsLink45Deg,
   BsPlay,
+  BsStarFill,
 } from 'react-icons/bs';
-import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
+import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
 import { TSingleMovie } from 'types/movieTypes';
 import { TSingleTV } from 'types/tvTypes';
 
@@ -31,11 +31,10 @@ type ItemHeaderProps = {
 
 const ItemHeader: React.FC<ItemHeaderProps> = ({ data, tvHeader }) => {
   return (
-    <Flex
+    <Box
       position="relative"
-      p={[6, null, 12]}
-      minH={['calc(100vh - 8.5rem)', null, 'xl']}
-      align="center"
+      py={[8, null, 20]}
+      minH={['calc(100vh - 8.5rem)', null, 'auto']}
       bgImage={`url('${
         data.backdrop_path && genBackdropImage(data.backdrop_path)
       }')`}
@@ -54,19 +53,15 @@ const ItemHeader: React.FC<ItemHeaderProps> = ({ data, tvHeader }) => {
         zIndex={-1}
       />
       <Container>
-        <Flex
-          w="full"
-          direction={['column', null, 'row']}
-          align={['flex-start', null, 'center']}
-        >
+        <Flex w="full" direction={['column', null, 'row']} align="flex-start">
           <Box
             bg="gray.700"
             bgImage={[
               `url('${
-                data.poster_path && genPosterImage(data.poster_path, 'sm')
+                data.poster_path && genPosterImage(data.poster_path!, 'sm')
               }')`,
               null,
-              `url('${data.poster_path && genPosterImage(data.poster_path)}')`,
+              `url('${data.poster_path && genPosterImage(data.poster_path!)}')`,
             ]}
             bgSize="cover"
             bgPosition="center"
@@ -77,7 +72,7 @@ const ItemHeader: React.FC<ItemHeaderProps> = ({ data, tvHeader }) => {
             mb={4}
             flexShrink={0}
           />
-          <Box ml={[0, null, 12]}>
+          <Box ml={[0, null, 12]} mt={[0, null, 6]}>
             <Heading fontSize={[22, 32, 40]}>
               {data.title || data.name}{' '}
               <Heading
@@ -158,7 +153,7 @@ const ItemHeader: React.FC<ItemHeaderProps> = ({ data, tvHeader }) => {
           </Box>
         </Flex>
       </Container>
-    </Flex>
+    </Box>
   );
 };
 

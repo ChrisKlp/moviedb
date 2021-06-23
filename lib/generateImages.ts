@@ -26,7 +26,7 @@ export const genPosterImage = (path: string, size?: string): string => {
   }
 };
 
-export const genProfileImage = (path: string, size?: string): string => {
+export const genPersonImage = (path: string, size?: string): string => {
   switch (size) {
     case 'sm':
       return `${baseUrl}w185${path}`;
