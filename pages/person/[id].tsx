@@ -1,5 +1,6 @@
 import { Container, Skeleton, Spinner } from '@chakra-ui/react';
 import { ItemCardList } from 'components';
+import Loading from 'components/Loading';
 import PersonCredits from 'components/PersonPage/PersonCredits';
 import PersonHeader from 'components/PersonPage/PersonHeader';
 import fetcher from 'lib/fetcher';
@@ -29,27 +30,19 @@ const SinglePersonPage: React.FC<SinglePersonPageProps> = ({ query }) => {
     },
   ]);
 
+  if (dataQuery.some(query => query.isLoading)) return <Loading />;
+
   return (
-    <Container py={[8, null, 20]}>
-      <Skeleton isLoaded={dataQuery[0].status === 'success'}>
-        {dataQuery[0].data && <PersonHeader data={dataQuery[0].data} />}
-      </Skeleton>
-      <Skeleton isLoaded={dataQuery[1].status === 'success'}>
-        {dataQuery[1].data?.cast && (
-          <ItemCardList
-            heading="Known For"
-            data={personTopCredits(dataQuery[1].data.cast)}
-          />
-        )}
-      </Skeleton>
-      <Skeleton isLoaded={dataQuery[1].status === 'success'}>
-        {dataQuery[1].data?.cast && (
-          <PersonCredits
-            movies={personMovieList(dataQuery[1].data.cast)}
-            tvShows={personTvList(dataQuery[1].data.cast)}
-          />
-        )}
-      </Skeleton>
+    <Container py={[8, null, 20]} as="main">
+      <PersonHeader data={dataQuery[0].data} />
+      <ItemCardList
+        heading="Known For"
+        data={personTopCredits(dataQuery[1].data.cast)}
+      />
+      <PersonCredits
+        movies={personMovieList(dataQuery[1].data.cast)}
+        tvShows={personTvList(dataQuery[1].data.cast)}
+      />
     </Container>
   );
 };

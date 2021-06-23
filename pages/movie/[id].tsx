@@ -1,9 +1,9 @@
-import React from 'react';
-import { Container, Skeleton, Spinner } from '@chakra-ui/react';
+import { Box, Container, Spinner } from '@chakra-ui/react';
+import { CastCardList, SinglePageHeader } from 'components';
+import Loading from 'components/Loading';
 import fetcher from 'lib/fetcher';
 import { useQueriesTyped } from 'lib/useQueriesTyped';
-import _ from 'lodash';
-import { SinglePageHeader, CastCardList } from 'components';
+import React from 'react';
 
 type SingleMoviePageProps = {
   query: {
@@ -25,22 +25,18 @@ const SingleMoviePage = ({ query }: SingleMoviePageProps) => {
 
   // console.log(_.filter(dataQuery[1].data.crew, { job: 'Screenplay' }));
 
+  if (dataQuery.some(query => query.isLoading)) return <Loading />;
+
   return (
-    <>
-      <Skeleton isLoaded={dataQuery[0].status === 'success'}>
-        {dataQuery[0].data && <SinglePageHeader data={dataQuery[0].data} />}
-      </Skeleton>
+    <Box as="main">
+      <SinglePageHeader data={dataQuery[0].data} />
       <Container>
-        <Skeleton isLoaded={dataQuery[1].status === 'success'}>
-          {dataQuery[1].data && (
-            <CastCardList
-              heading="Cast"
-              data={dataQuery[1].data.cast.slice(0, 15)}
-            />
-          )}
-        </Skeleton>
+        <CastCardList
+          heading="Cast"
+          data={dataQuery[1].data.cast.slice(0, 15)}
+        />
       </Container>
-    </>
+    </Box>
   );
 };
 

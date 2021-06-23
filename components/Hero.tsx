@@ -51,7 +51,11 @@ const Hero: React.FC<HeroProps> = ({ data, genres }) => {
         left={0}
         w="full"
         h="full"
-        bgGradient="linear(to-r, rgba(0,0,0,0), gray.900)"
+        bgGradient={[
+          'linear(to-b, rgba(0,0,0,0), gray.900)',
+          null,
+          'linear(to-r, rgba(0,0,0,0), gray.900)',
+        ]}
         zIndex={-1}
       />
       <Container>

@@ -23,7 +23,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
         h={64}
         w="full"
         mb={4}
-      ></Box>
+      />
       <Text fontWeight="bold" fontSize="sm">
         {data.title || data.name}
       </Text>

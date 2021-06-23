@@ -11,7 +11,7 @@ const CastCard: React.FC<CastCardProps> = ({ data }) => {
   const bgImage = data.profile_path && genPersonImage(data.profile_path, 'sm');
 
   return (
-    <VStack align="flex-start" spacing={1} minW={32} w="full">
+    <VStack align="flex-start" spacing={1} w={32}>
       <Box
         bg="gray.700"
         bgImage={`url('${bgImage}')`}

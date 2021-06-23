@@ -1,9 +1,10 @@
-import React from 'react';
-import { Container, Spinner } from '@chakra-ui/react';
-import { SinglePageHeader, CastCardList } from 'components';
+import { Box, Container, Spinner } from '@chakra-ui/react';
+import { CastCardList, SinglePageHeader } from 'components';
+import Loading from 'components/Loading';
 import fetcher from 'lib/fetcher';
 import { useQueriesTyped } from 'lib/useQueriesTyped';
 import _ from 'lodash';
+import React from 'react';
 
 type SingleTvPageProps = {
   query: {
@@ -23,14 +24,12 @@ const SingleTvPage = ({ query }: SingleTvPageProps) => {
     },
   ]);
 
-  if (dataQuery.some(query => query.isLoading))
-    return <Spinner colorScheme="teal" />;
+  if (dataQuery.some(query => query.isLoading)) return <Loading />;
 
   console.log(_.filter(dataQuery[1].data.crew, { job: 'Screenplay' }));
-  console.log(dataQuery);
 
   return (
-    <>
+    <Box as="main">
       <SinglePageHeader data={dataQuery[0].data} tvHeader />
       <Container>
         <CastCardList
@@ -38,7 +37,7 @@ const SingleTvPage = ({ query }: SingleTvPageProps) => {
           data={dataQuery[1].data.cast.slice(0, 15)}
         />
       </Container>
-    </>
+    </Box>
   );
 };
 

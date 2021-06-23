@@ -4,6 +4,14 @@ import theme from 'styles/theme';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { NextRouter } from 'next/dist/client/router';
 import { Layout } from 'components';
+import Router from 'next/router';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+import QueryErrorBoundary from 'components/QueryErrorBoundary';
+
+Router.events.on('routeChangeStart', () => NProgress.start());
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const queryClient = new QueryClient();
@@ -11,7 +19,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={theme}>
         <Layout>
-          <Component {...pageProps} />
+          <QueryErrorBoundary>
+            <Component {...pageProps} />
+          </QueryErrorBoundary>
         </Layout>
       </ChakraProvider>
     </QueryClientProvider>

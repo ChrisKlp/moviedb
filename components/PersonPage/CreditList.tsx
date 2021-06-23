@@ -1,14 +1,7 @@
-import {
-  Heading,
-  Box,
-  HStack,
-  Text,
-  VStack,
-  Link,
-  Divider,
-} from '@chakra-ui/react';
-import { TPersonCast } from 'types/castTypes';
+import { Divider, HStack, Link, Text, VStack } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import React from 'react';
+import { TPersonCast } from 'types/castTypes';
 
 type CreditListProps = {
   data: TPersonCast[];
@@ -31,9 +24,9 @@ const CreditList: React.FC<CreditListProps> = ({ data }) => {
 
   return (
     <VStack spacing={4} align="flex-start">
-      {data.map(item => (
-        <>
-          <HStack key={item.id} spacing={4}>
+      {data.map((item, index) => (
+        <React.Fragment key={`${index}-${item.id}`}>
+          <HStack spacing={4}>
             <Text w={10} textAlign="center">
               {generateDate(item)}
             </Text>
@@ -47,7 +40,7 @@ const CreditList: React.FC<CreditListProps> = ({ data }) => {
             </Text>
           </HStack>
           <Divider />
-        </>
+        </React.Fragment>
       ))}
     </VStack>
   );
