@@ -9,14 +9,17 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import _ from 'lodash';
-import React from 'react';
-import { BsDot, BsPlay, BsStarFill } from 'react-icons/bs';
+import fetcher from 'lib/fetcher';
 import { genBackdropImage } from 'lib/generateImages';
+import { generateTruncateText } from 'lib/generateTruncateText';
+import _ from 'lodash';
 import Link from 'next/link';
+import React from 'react';
+import { BsDot, BsStarFill } from 'react-icons/bs';
+import { useQuery } from 'react-query';
 import { TMovieItem } from 'types/movieTypes';
 import { TTvItem } from 'types/tvTypes';
-import { generateTruncateText } from 'lib/generateTruncateText';
+import Trailer from './Trailer';
 
 type HeroProps = {
   data: TMovieItem & TTvItem;
@@ -27,6 +30,10 @@ type HeroProps = {
 };
 
 const Hero: React.FC<HeroProps> = ({ data, genres }) => {
+  const { data: trailerData, isLoading } = useQuery('heroIdTrailer', () =>
+    fetcher(`/movie/${data.id}/videos`)
+  );
+
   const filteredGenres = _.filter(genres, o =>
     _.includes(data.genre_ids, o.id)
   );
@@ -89,14 +96,9 @@ const Hero: React.FC<HeroProps> = ({ data, genres }) => {
                 View more
               </Button>
             </Link>
-            <Button
-              colorScheme="teal"
-              rounded="full"
-              variant="ghost"
-              rightIcon={<BsPlay size={20} />}
-            >
-              Play Trailer
-            </Button>
+            {!isLoading && trailerData.results[0] && (
+              <Trailer data={trailerData.results[0].key} />
+            )}
           </HStack>
         </VStack>
       </Container>

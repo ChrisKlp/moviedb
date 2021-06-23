@@ -1,11 +1,11 @@
-import React from 'react';
-import { Box, Container, Spinner, Skeleton, Center } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
+import { ItemCardList } from 'components';
 import Hero from 'components/Hero';
+import Loading from 'components/Loading';
 import fetcher from 'lib/fetcher';
 import { useQueriesTyped } from 'lib/useQueriesTyped';
 import _ from 'lodash';
-import { ItemCardList } from 'components';
-import Loading from 'components/Loading';
+import React from 'react';
 
 const HomePage: React.FC = () => {
   const dataQuery = useQueriesTyped([

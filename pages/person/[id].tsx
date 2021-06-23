@@ -1,6 +1,5 @@
-import { Container, Skeleton, Spinner } from '@chakra-ui/react';
-import { ItemCardList } from 'components';
-import Loading from 'components/Loading';
+import { Container } from '@chakra-ui/react';
+import { ItemCardList, Loading } from 'components';
 import PersonCredits from 'components/PersonPage/PersonCredits';
 import PersonHeader from 'components/PersonPage/PersonHeader';
 import fetcher from 'lib/fetcher';

@@ -1,6 +1,5 @@
-import { Box, Container, Spinner } from '@chakra-ui/react';
-import { CastCardList, SinglePageHeader } from 'components';
-import Loading from 'components/Loading';
+import { Box, Container } from '@chakra-ui/react';
+import { CastCardList, Loading, SinglePageHeader } from 'components';
 import fetcher from 'lib/fetcher';
 import { useQueriesTyped } from 'lib/useQueriesTyped';
 import _ from 'lodash';

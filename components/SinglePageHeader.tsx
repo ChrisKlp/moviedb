@@ -21,15 +21,19 @@ import {
   BsStarFill,
 } from 'react-icons/bs';
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
+import { TTrailer } from 'types/commonTypes';
 import { TSingleMovie } from 'types/movieTypes';
 import { TSingleTV } from 'types/tvTypes';
+import Trailer from './Trailer';
 
 type ItemHeaderProps = {
   data: TSingleMovie & TSingleTV;
+  trailer?: TTrailer;
   tvHeader?: boolean;
 };
 
-const ItemHeader: React.FC<ItemHeaderProps> = ({ data, tvHeader }) => {
+const ItemHeader: React.FC<ItemHeaderProps> = ({ data, tvHeader, trailer }) => {
+  console.log(trailer);
   return (
     <Box
       position="relative"
@@ -141,14 +145,7 @@ const ItemHeader: React.FC<ItemHeaderProps> = ({ data, tvHeader }) => {
                   size="lg"
                 />
               </Tooltip>
-              <Button
-                colorScheme="teal"
-                rounded="full"
-                variant="ghost"
-                rightIcon={<BsPlay size={20} />}
-              >
-                Play Trailer
-              </Button>
+              {trailer && <Trailer data={trailer.key} />}
             </HStack>
           </Box>
         </Flex>

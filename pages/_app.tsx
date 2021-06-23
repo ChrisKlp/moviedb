@@ -1,13 +1,12 @@
-import type { AppContext, AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
-import theme from 'styles/theme';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { Layout, QueryErrorBoundary } from 'components';
+import type { AppContext, AppProps } from 'next/app';
 import { NextRouter } from 'next/dist/client/router';
-import { Layout } from 'components';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
-import QueryErrorBoundary from 'components/QueryErrorBoundary';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import theme from 'styles/theme';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());

@@ -1,8 +1,8 @@
-import { Box, Container, Spinner } from '@chakra-ui/react';
-import { CastCardList, SinglePageHeader } from 'components';
-import Loading from 'components/Loading';
+import { Box, Container } from '@chakra-ui/react';
+import { CastCardList, Loading, SinglePageHeader } from 'components';
 import fetcher from 'lib/fetcher';
 import { useQueriesTyped } from 'lib/useQueriesTyped';
+import _ from 'lodash';
 import React from 'react';
 
 type SingleMoviePageProps = {
@@ -21,15 +21,22 @@ const SingleMoviePage = ({ query }: SingleMoviePageProps) => {
       queryKey: `movieCredits${query.id}`,
       queryFn: () => fetcher(`/movie/${query.id}/credits`),
     },
+    {
+      queryKey: `movieVideos${query.id}`,
+      queryFn: () => fetcher(`/movie/${query.id}/videos`),
+    },
   ]);
-
-  // console.log(_.filter(dataQuery[1].data.crew, { job: 'Screenplay' }));
 
   if (dataQuery.some(query => query.isLoading)) return <Loading />;
 
+  console.log(dataQuery);
+
   return (
     <Box as="main">
-      <SinglePageHeader data={dataQuery[0].data} />
+      <SinglePageHeader
+        data={dataQuery[0].data}
+        trailer={dataQuery[2].data.results[0]}
+      />
       <Container>
         <CastCardList
           heading="Cast"
