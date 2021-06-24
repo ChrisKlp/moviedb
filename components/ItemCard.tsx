@@ -25,7 +25,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
           w="full"
         />
       </AspectRatio>
-      <Text fontWeight="bold" fontSize="sm">
+      <Text fontWeight="bold" fontSize="sm" mb={1}>
         {data.title || data.name}
       </Text>
       <Flex justify="space-between" w="full">

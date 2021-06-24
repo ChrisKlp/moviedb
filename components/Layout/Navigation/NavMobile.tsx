@@ -2,10 +2,13 @@ import { Box, Flex, Icon, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import NextLink from 'next/link';
 import navItems from './navItems';
+import { GoSearch } from 'react-icons/go';
 
-type NavMobileProps = {};
+type NavMobileProps = {
+  onSearchOpen: () => void;
+};
 
-const NavMobile: React.FC<NavMobileProps> = () => {
+const NavMobile: React.FC<NavMobileProps> = ({ onSearchOpen }) => {
   return (
     <Box
       display={['block', null, 'none']}
@@ -16,6 +19,12 @@ const NavMobile: React.FC<NavMobileProps> = () => {
       flexShrink={0}
     >
       <Flex w="full" h="full" justify="space-around" align="center" p={4}>
+        <VStack as="button" onClick={onSearchOpen}>
+          <GoSearch size={20} color="#a0aec0" />
+          <Text as="span" fontSize="xs" color="gray.400" flexShrink={0}>
+            Search
+          </Text>
+        </VStack>
         {navItems.map(item => (
           <NextLink href={item.href} key={item.id}>
             <a>

@@ -16,9 +16,14 @@ type TTrendingAll = TMovieItem & TTvItem;
 type SwiperItemListProps = {
   data: TTrendingAll[];
   heading: string;
+  category?: 'movie' | 'tv';
 };
 
-const SwiperItemList: React.FC<SwiperItemListProps> = ({ data, heading }) => {
+const SwiperItemList: React.FC<SwiperItemListProps> = ({
+  data,
+  heading,
+  category,
+}) => {
   const [nextEl, nextElRef] = useSwiperRef<HTMLButtonElement>();
   const [prevEl, prevElRef] = useSwiperRef<HTMLButtonElement>();
 
@@ -55,20 +60,23 @@ const SwiperItemList: React.FC<SwiperItemListProps> = ({ data, heading }) => {
             '1024': {
               slidesPerView: 5,
               slidesPerGroup: 5,
+              freeMode: false,
             },
             '1280': {
               slidesPerView: 6,
               slidesPerGroup: 6,
+              freeMode: false,
             },
             '1440': {
               slidesPerView: 8,
               slidesPerGroup: 8,
+              freeMode: false,
             },
           }}
         >
           {data.map(item => (
             <SwiperSlide key={item.id}>
-              <Link href={`/${item.media_type}/${item.id}`}>
+              <Link href={`/${item.media_type || category}/${item.id}`}>
                 <a>
                   <ItemCard data={item} />
                 </a>

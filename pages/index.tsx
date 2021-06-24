@@ -10,6 +10,8 @@ const HomePage: React.FC = () => {
     { queryKey: 'trendingAll', queryFn: () => fetcher('/trending/all/day') },
     { queryKey: 'genresMovie', queryFn: () => fetcher('/genre/movie/list') },
     { queryKey: 'genresTv', queryFn: () => fetcher('/genre/tv/list') },
+    { queryKey: 'upcoming', queryFn: () => fetcher('/movie/upcoming') },
+    { queryKey: 'tvPopular', queryFn: () => fetcher('/tv/popular') },
   ]);
 
   if (dataQuery.some(query => query.isLoading)) return <Loading />;
@@ -27,6 +29,16 @@ const HomePage: React.FC = () => {
         <SwiperItemList
           heading="Trending Today"
           data={dataQuery[0].data.results.slice(1)}
+        />
+        <SwiperItemList
+          heading="Upcoming Movies"
+          category="movie"
+          data={dataQuery[3].data.results}
+        />
+        <SwiperItemList
+          heading="Popular on TV"
+          category="tv"
+          data={dataQuery[4].data.results}
         />
       </Container>
     </>
