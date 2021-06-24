@@ -1,11 +1,25 @@
 import {
+  Box,
+  Container,
+  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalOverlay,
+  SimpleGrid,
+  Center,
+  Button,
 } from '@chakra-ui/react';
-import React from 'react';
+import fetcher from 'lib/fetcher';
+import { debounce } from 'lodash';
+import Link from 'next/link';
+import React, { useCallback, useState } from 'react';
+import { useQuery } from 'react-query';
+import { TMovieItem } from 'types/movieTypes';
+import { TSinglePerson } from 'types/personTypes';
+import { TTvItem } from 'types/tvTypes';
+import SearchCard from './SearchCard';
 
 type SearchProps = {
   isOpen: boolean;
@@ -13,13 +27,67 @@ type SearchProps = {
 };
 
 const Search: React.FC<SearchProps> = ({ isOpen, onClose }) => {
+  const [value, setValue] = useState('');
+
+  const { isLoading, data, refetch } = useQuery(
+    'search',
+    () => fetcher(`/search/multi?query=${value}`),
+    {
+      enabled: false,
+    }
+  );
+  const debounceRefetch = useCallback(debounce(refetch, 600), []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    debounceRefetch();
+  };
+
   return (
-    <Modal isCentered isOpen={isOpen} size="full" onClose={onClose}>
+    <Modal isOpen={isOpen} size="full" onClose={onClose}>
       <ModalOverlay />
-      <ModalContent bg="gray.900">
+      <ModalContent bg="gray.900" m={0} rounded={0}>
         <ModalCloseButton />
-        <ModalBody m={0} p={0}>
-          <p>hello from modal</p>
+        <ModalBody p={0} m={0}>
+          <Container mt={40}>
+            <Box>
+              <Input
+                type="text"
+                variant="flushed"
+                placeholder="Search"
+                fontSize="5xl"
+                fontWeight="light"
+                h={20}
+                onChange={handleChange}
+                mb={12}
+              />
+            </Box>
+            {!isLoading && !!data?.results?.length && (
+              <>
+                <SimpleGrid minChildWidth={160} spacing={5} mb={12}>
+                  {data.results
+                    .slice(0, 8)
+                    .map((item: TMovieItem & TTvItem & TSinglePerson) => (
+                      <Link
+                        href={`/${item.media_type}/${item.id}`}
+                        key={item.id}
+                      >
+                        <a>
+                          <SearchCard data={item} />
+                        </a>
+                      </Link>
+                    ))}
+                </SimpleGrid>
+                <Center py={6}>
+                  <Link href={`/search/${value}`} passHref>
+                    <Button as="a" colorScheme="teal" onClick={onClose}>
+                      Load More
+                    </Button>
+                  </Link>
+                </Center>
+              </>
+            )}
+          </Container>
         </ModalBody>
       </ModalContent>
     </Modal>

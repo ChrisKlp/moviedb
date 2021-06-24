@@ -7,23 +7,29 @@ import {
   SimpleGrid,
   Text,
 } from '@chakra-ui/react';
-import { Loading, ItemCard } from 'components';
-import { paginatedFetcher } from 'lib/fetcher';
+import { Loading } from 'components';
+import SearchCard from 'components/Search/SearchCard';
+import { searchFetcher } from 'lib/fetcher';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import { useQuery } from 'react-query';
 import { TMovieItem } from 'types/movieTypes';
+import { TSinglePerson } from 'types/personTypes';
 import { TTvItem } from 'types/tvTypes';
 
-type MoviesPageProps = {};
+type SearchPageProps = {
+  query: {
+    query: string;
+  };
+};
 
-const MoviesPage: React.FC<MoviesPageProps> = () => {
+const SearchPage: React.FC<SearchPageProps> = ({ query }) => {
   const [page, setPage] = useState(1);
 
   const { isLoading, data, isPreviousData } = useQuery(
-    ['topMovies', page],
-    () => paginatedFetcher('/movie/top_rated', page),
+    ['searchQuery', page, query.query],
+    () => searchFetcher(`/search/multi?query=${query.query}`, page),
     {
       keepPreviousData: true,
     }
@@ -44,7 +50,7 @@ const MoviesPage: React.FC<MoviesPageProps> = () => {
     <Container py={8}>
       <HStack justify="space-between">
         <Box>
-          <Heading mb={2}>Top Reated Movies</Heading>
+          <Heading mb={2}>Results for: "{query.query}"</Heading>
           <Text fontSize="xs">
             Page: {page} / {data?.total_pages}
           </Text>
@@ -73,10 +79,10 @@ const MoviesPage: React.FC<MoviesPageProps> = () => {
         </Button>
       </HStack>
       <SimpleGrid minChildWidth={160} spacing={5}>
-        {data.results.map((item: TMovieItem & TTvItem) => (
-          <Link href={`/movie/${item.id}`} key={item.id}>
+        {data.results.map((item: TMovieItem & TTvItem & TSinglePerson) => (
+          <Link href={`/${item.media_type}/${item.id}`} key={item.id}>
             <a>
-              <ItemCard data={item} />
+              <SearchCard data={item} />
             </a>
           </Link>
         ))}
@@ -85,4 +91,4 @@ const MoviesPage: React.FC<MoviesPageProps> = () => {
   );
 };
 
-export default MoviesPage;
+export default SearchPage;

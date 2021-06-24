@@ -74,7 +74,7 @@ const TvSeriesPage: React.FC<TvSeriesPageProps> = () => {
       </HStack>
       <SimpleGrid minChildWidth={160} spacing={5}>
         {data.results.map((item: TMovieItem & TTvItem) => (
-          <Link href={`/tv/${item.id}`}>
+          <Link href={`/tv/${item.id}`} key={item.id}>
             <a>
               <ItemCard data={item} />
             </a>

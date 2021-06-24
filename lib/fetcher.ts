@@ -23,3 +23,14 @@ export const paginatedFetcher = async (url: string, page = 1) => {
 
   return res.json();
 };
+
+export const searchFetcher = async (url: string, page = 1) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST}${url}&page=${page}`,
+    {
+      headers,
+    }
+  );
+
+  return res.json();
+};

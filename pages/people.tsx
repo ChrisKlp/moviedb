@@ -76,7 +76,7 @@ const PeoplePage: React.FC<PeoplePageProps> = () => {
       </HStack>
       <SimpleGrid minChildWidth={120} spacing={5}>
         {data.results.map((item: TCast) => (
-          <Link href={`/person/${item.id}`}>
+          <Link href={`/person/${item.id}`} key={item.id}>
             <a>
               <CastCard data={item} />
             </a>

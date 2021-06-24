@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </Box>
         <NavMobile onSearchOpen={onOpen} />
       </Flex>
-      <Search isOpen={isOpen} onClose={onClose} />
+      {isOpen && <Search isOpen={isOpen} onClose={onClose} />}
     </>
   );
 };
