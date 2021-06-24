@@ -1,5 +1,5 @@
 import { Box, Container } from '@chakra-ui/react';
-import { CastCardList, Loading, SinglePageHeader } from 'components';
+import { SwiperCastList, Loading, SinglePageHeader } from 'components';
 import fetcher from 'lib/fetcher';
 import { useQueriesTyped } from 'lib/useQueriesTyped';
 import _ from 'lodash';
@@ -28,15 +28,15 @@ const SingleTvPage = ({ query }: SingleTvPageProps) => {
   console.log(_.filter(dataQuery[1].data.crew, { job: 'Screenplay' }));
 
   return (
-    <Box as="main">
+    <>
       <SinglePageHeader data={dataQuery[0].data} tvHeader />
       <Container>
-        <CastCardList
+        <SwiperCastList
           heading="Cast"
           data={dataQuery[1].data.cast.slice(0, 15)}
         />
       </Container>
-    </Box>
+    </>
   );
 };
 

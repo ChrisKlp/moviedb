@@ -7,6 +7,8 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import theme from 'styles/theme';
+import 'swiper/swiper.min.css';
+import 'swiper/components/navigation/navigation.min.css';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());

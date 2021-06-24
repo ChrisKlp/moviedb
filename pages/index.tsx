@@ -1,7 +1,5 @@
-import { Box, Container } from '@chakra-ui/react';
-import { ItemCardList } from 'components';
-import Hero from 'components/Hero';
-import Loading from 'components/Loading';
+import { Container } from '@chakra-ui/react';
+import { Loading, Hero, SwiperItemList } from 'components';
 import fetcher from 'lib/fetcher';
 import { useQueriesTyped } from 'lib/useQueriesTyped';
 import _ from 'lodash';
@@ -17,7 +15,7 @@ const HomePage: React.FC = () => {
   if (dataQuery.some(query => query.isLoading)) return <Loading />;
 
   return (
-    <Box as="main">
+    <>
       <Hero
         data={dataQuery[0].data.results[0]}
         genres={_.uniqBy(
@@ -26,12 +24,12 @@ const HomePage: React.FC = () => {
         )}
       />
       <Container>
-        <ItemCardList
+        <SwiperItemList
           heading="Trending Today"
           data={dataQuery[0].data.results.slice(1)}
         />
       </Container>
-    </Box>
+    </>
   );
 };
 

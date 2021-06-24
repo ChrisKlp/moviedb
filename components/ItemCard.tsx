@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Icon, Text, VStack } from '@chakra-ui/react';
+import { AspectRatio, Box, Flex, HStack, Icon, Text } from '@chakra-ui/react';
 import { genPosterImage } from 'lib/generateImages';
 import React from 'react';
 import { BsStarFill } from 'react-icons/bs';
@@ -13,17 +13,18 @@ const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
   const bgImage = data.poster_path && genPosterImage(data.poster_path, 'sm');
 
   return (
-    <VStack align="flex-start" spacing={1} w={40}>
-      <Box
-        bg="gray.700"
-        bgImage={`url('${bgImage}')`}
-        bgSize="cover"
-        bgPosition="center"
-        rounded="md"
-        h={64}
-        w="full"
-        mb={4}
-      />
+    <Box w="full">
+      <AspectRatio ratio={2 / 3} mb={4}>
+        <Box
+          bg="gray.700"
+          bgImage={`url('${bgImage}')`}
+          bgSize="cover"
+          bgPosition="center"
+          rounded="md"
+          h={64}
+          w="full"
+        />
+      </AspectRatio>
       <Text fontWeight="bold" fontSize="sm">
         {data.title || data.name}
       </Text>
@@ -38,7 +39,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
           </Text>
         </HStack>
       </Flex>
-    </VStack>
+    </Box>
   );
 };
 

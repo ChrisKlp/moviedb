@@ -1,0 +1,112 @@
+import { Box, Heading, IconButton } from '@chakra-ui/react';
+import useSwiperRef from 'lib/useSwiperRef';
+import Link from 'next/link';
+import React from 'react';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import SwiperCore, { Navigation } from 'swiper/core';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { TMovieItem } from 'types/movieTypes';
+import { TTvItem } from 'types/tvTypes';
+import ItemCard from './ItemCard';
+
+SwiperCore.use([Navigation]);
+
+type TTrendingAll = TMovieItem & TTvItem;
+
+type SwiperItemListProps = {
+  data: TTrendingAll[];
+  heading: string;
+};
+
+const SwiperItemList: React.FC<SwiperItemListProps> = ({ data, heading }) => {
+  const [nextEl, nextElRef] = useSwiperRef<HTMLButtonElement>();
+  const [prevEl, prevElRef] = useSwiperRef<HTMLButtonElement>();
+
+  return (
+    <Box py={8}>
+      <Heading fontSize="xl" fontWeight="semibold" color="teal.300" mb={6}>
+        {heading}
+      </Heading>
+      <Box position="relative">
+        <Swiper
+          navigation={{
+            prevEl,
+            nextEl,
+          }}
+          onInit={swiper => {
+            //@ts-ignore
+            swiper.params.navigation.prevEl = prevEl;
+            //@ts-ignore
+            swiper.params.navigation.nextEl = nextEl;
+            swiper.navigation.update();
+          }}
+          spaceBetween={20}
+          slidesPerView={2}
+          freeMode={true}
+          breakpoints={{
+            '480': {
+              slidesPerView: 3,
+            },
+            '768': {
+              slidesPerView: 4,
+              slidesPerGroup: 4,
+              freeMode: false,
+            },
+            '1024': {
+              slidesPerView: 5,
+              slidesPerGroup: 5,
+            },
+            '1280': {
+              slidesPerView: 6,
+              slidesPerGroup: 6,
+            },
+            '1440': {
+              slidesPerView: 8,
+              slidesPerGroup: 8,
+            },
+          }}
+        >
+          {data.map(item => (
+            <SwiperSlide key={item.id}>
+              <Link href={`/${item.media_type}/${item.id}`}>
+                <a>
+                  <ItemCard data={item} />
+                </a>
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <IconButton
+          position="absolute"
+          top="35%"
+          left="-20px"
+          icon={<MdKeyboardArrowLeft size={20} />}
+          ref={prevElRef}
+          aria-label="prev button"
+          rounded="full"
+          colorScheme="teal"
+          zIndex="docked"
+          display={['none', null, 'inline-flex']}
+        >
+          left
+        </IconButton>
+        <IconButton
+          position="absolute"
+          top="35%"
+          right="-20px"
+          icon={<MdKeyboardArrowRight size={20} />}
+          ref={nextElRef}
+          aria-label="next button"
+          rounded="full"
+          colorScheme="teal"
+          zIndex="docked"
+          display={['none', null, 'inline-flex']}
+        >
+          right
+        </IconButton>
+      </Box>
+    </Box>
+  );
+};
+
+export default SwiperItemList;

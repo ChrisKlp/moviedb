@@ -1,5 +1,5 @@
 import { Container } from '@chakra-ui/react';
-import { ItemCardList, Loading } from 'components';
+import { SwiperItemList, Loading } from 'components';
 import PersonCredits from 'components/PersonPage/PersonCredits';
 import PersonHeader from 'components/PersonPage/PersonHeader';
 import fetcher from 'lib/fetcher';
@@ -32,9 +32,9 @@ const SinglePersonPage: React.FC<SinglePersonPageProps> = ({ query }) => {
   if (dataQuery.some(query => query.isLoading)) return <Loading />;
 
   return (
-    <Container py={[8, null, 20]} as="main">
+    <Container py={[8, null, 20]}>
       <PersonHeader data={dataQuery[0].data} />
-      <ItemCardList
+      <SwiperItemList
         heading="Known For"
         data={personTopCredits(dataQuery[1].data.cast)}
       />
