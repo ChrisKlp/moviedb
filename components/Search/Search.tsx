@@ -7,9 +7,9 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalOverlay,
-  SimpleGrid,
   Center,
   Button,
+  Grid,
 } from '@chakra-ui/react';
 import fetcher from 'lib/fetcher';
 import { debounce } from 'lodash';
@@ -64,7 +64,12 @@ const Search: React.FC<SearchProps> = ({ isOpen, onClose }) => {
             </Box>
             {!isLoading && !!data?.results?.length && (
               <>
-                <SimpleGrid minChildWidth={160} spacing={5} mb={12}>
+                <Grid
+                  templateColumns="repeat( auto-fill, minmax(160px, 1fr))"
+                  justifyContent="start"
+                  gap={5}
+                  mb={12}
+                >
                   {data.results
                     .slice(0, 8)
                     .map((item: TMovieItem & TTvItem & TSinglePerson) => (
@@ -77,7 +82,7 @@ const Search: React.FC<SearchProps> = ({ isOpen, onClose }) => {
                         </a>
                       </Link>
                     ))}
-                </SimpleGrid>
+                </Grid>
                 <Center py={6}>
                   <Link href={`/search/${value}`} passHref>
                     <Button as="a" colorScheme="teal" onClick={onClose}>

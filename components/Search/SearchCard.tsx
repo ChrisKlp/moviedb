@@ -16,7 +16,7 @@ const SearchCard: React.FC<SearchCardProps> = ({ data }) => {
     : data.profile_path && genPersonImage(data.profile_path, 'sm');
 
   return (
-    <Box w="full">
+    <Box w="full" maxW={160}>
       <AspectRatio ratio={2 / 3} mb={4}>
         <Box
           bg="gray.700"
