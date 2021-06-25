@@ -8,8 +8,6 @@ type CreditListProps = {
 };
 
 const CreditList: React.FC<CreditListProps> = ({ data }) => {
-  console.log(data);
-
   const generateDate = (item: TPersonCast) => {
     if (item.release_date) {
       return item.release_date.substring(0, 4);

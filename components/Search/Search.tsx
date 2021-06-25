@@ -14,7 +14,7 @@ import {
 import fetcher from 'lib/fetcher';
 import { debounce } from 'lodash';
 import Link from 'next/link';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useQuery } from 'react-query';
 import { TMovieItem } from 'types/movieTypes';
 import { TSinglePerson } from 'types/personTypes';
@@ -28,6 +28,7 @@ type SearchProps = {
 
 const Search: React.FC<SearchProps> = ({ isOpen, onClose }) => {
   const [value, setValue] = useState('');
+  const initialRef = useRef<HTMLInputElement>(null);
 
   const { isLoading, data, refetch } = useQuery(
     'search',
@@ -44,7 +45,12 @@ const Search: React.FC<SearchProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} size="full" onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      size="full"
+      onClose={onClose}
+      initialFocusRef={initialRef}
+    >
       <ModalOverlay />
       <ModalContent bg="gray.900" m={0} rounded={0}>
         <ModalCloseButton />
@@ -60,6 +66,7 @@ const Search: React.FC<SearchProps> = ({ isOpen, onClose }) => {
                 h={20}
                 onChange={handleChange}
                 mb={12}
+                ref={initialRef}
               />
             </Box>
             {!isLoading && !!data?.results?.length && (
@@ -77,7 +84,7 @@ const Search: React.FC<SearchProps> = ({ isOpen, onClose }) => {
                         href={`/${item.media_type}/${item.id}`}
                         key={item.id}
                       >
-                        <a>
+                        <a onClick={onClose}>
                           <SearchCard data={item} />
                         </a>
                       </Link>

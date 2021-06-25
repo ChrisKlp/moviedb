@@ -25,8 +25,6 @@ const SingleTvPage = ({ query }: SingleTvPageProps) => {
 
   if (dataQuery.some(query => query.isLoading)) return <Loading />;
 
-  console.log(_.filter(dataQuery[1].data.crew, { job: 'Screenplay' }));
-
   return (
     <>
       <SinglePageHeader data={dataQuery[0].data} tvHeader />

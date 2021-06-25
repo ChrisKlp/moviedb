@@ -3,13 +3,13 @@ import useSwiperRef from 'lib/useSwiperRef';
 import Link from 'next/link';
 import React from 'react';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-import SwiperCore, { Navigation } from 'swiper/core';
+import SwiperCore, { Navigation, Scrollbar } from 'swiper/core';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { TMovieItem } from 'types/movieTypes';
 import { TTvItem } from 'types/tvTypes';
 import ItemCard from './ItemCard';
 
-SwiperCore.use([Navigation]);
+SwiperCore.use([Navigation, Scrollbar]);
 
 type TTrendingAll = TMovieItem & TTvItem;
 
@@ -48,6 +48,7 @@ const SwiperItemList: React.FC<SwiperItemListProps> = ({
           spaceBetween={20}
           slidesPerView={2}
           freeMode={true}
+          scrollbar
           breakpoints={{
             '480': {
               slidesPerView: 3,
@@ -83,10 +84,11 @@ const SwiperItemList: React.FC<SwiperItemListProps> = ({
               </Link>
             </SwiperSlide>
           ))}
+          <Box h={8} />
         </Swiper>
         <IconButton
           position="absolute"
-          top="35%"
+          bottom="calc(50% + 20px)"
           left="-20px"
           icon={<MdKeyboardArrowLeft size={20} />}
           ref={prevElRef}
@@ -100,7 +102,7 @@ const SwiperItemList: React.FC<SwiperItemListProps> = ({
         </IconButton>
         <IconButton
           position="absolute"
-          top="35%"
+          bottom="calc(50% + 20px)"
           right="-20px"
           icon={<MdKeyboardArrowRight size={20} />}
           ref={nextElRef}

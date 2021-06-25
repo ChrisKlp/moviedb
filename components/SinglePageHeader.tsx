@@ -33,7 +33,6 @@ type ItemHeaderProps = {
 };
 
 const ItemHeader: React.FC<ItemHeaderProps> = ({ data, tvHeader, trailer }) => {
-  console.log(trailer);
   return (
     <Box
       position="relative"

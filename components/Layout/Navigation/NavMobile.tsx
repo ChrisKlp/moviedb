@@ -11,12 +11,15 @@ type NavMobileProps = {
 const NavMobile: React.FC<NavMobileProps> = ({ onSearchOpen }) => {
   return (
     <Box
+      position="absolute"
+      bottom={0}
       display={['block', null, 'none']}
       as="nav"
       h={20}
       w="full"
       bg="gray.800"
       flexShrink={0}
+      zIndex="docked"
     >
       <Flex w="full" h="full" justify="space-around" align="center" p={4}>
         <VStack as="button" onClick={onSearchOpen}>

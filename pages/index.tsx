@@ -2,10 +2,12 @@ import { Container } from '@chakra-ui/react';
 import { Loading, Hero, SwiperItemList } from 'components';
 import fetcher from 'lib/fetcher';
 import { useQueriesTyped } from 'lib/useQueriesTyped';
-import _ from 'lodash';
-import React from 'react';
+import { uniqBy } from 'lodash';
+import { QueryClient } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 
-const HomePage: React.FC = () => {
+const HomePage: React.FC = props => {
+  console.log(props);
   const dataQuery = useQueriesTyped([
     { queryKey: 'trendingAll', queryFn: () => fetcher('/trending/all/day') },
     { queryKey: 'genresMovie', queryFn: () => fetcher('/genre/movie/list') },
@@ -20,7 +22,7 @@ const HomePage: React.FC = () => {
     <>
       <Hero
         data={dataQuery[0].data.results[0]}
-        genres={_.uniqBy(
+        genres={uniqBy(
           [...dataQuery[1].data.genres, ...dataQuery[2].data.genres],
           'id'
         )}
@@ -46,3 +48,23 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
+
+export async function getServerSideProps() {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery('trendingAll', () =>
+    fetcher('/trending/all/day')
+  );
+  await queryClient.prefetchQuery('genresMovie', () =>
+    fetcher('/genre/movie/list')
+  );
+  await queryClient.prefetchQuery('genresTv', () => fetcher('/genre/tv/list'));
+  await queryClient.prefetchQuery('upcoming', () => fetcher('/movie/upcoming'));
+  await queryClient.prefetchQuery('tvPopular', () => fetcher('/tv/popular'));
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}

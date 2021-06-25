@@ -10,9 +10,21 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Flex direction={['column', null, 'row']} align="flex-start" h="100vh">
+      <Flex
+        direction={['column', null, 'row']}
+        align="flex-start"
+        h="100vh"
+        position="relative"
+      >
         <Header onSearchOpen={onOpen} />
-        <Box as="main" w="full" overflowY="auto" h="full">
+        <Box
+          as="main"
+          w="full"
+          h="full"
+          overflowY="auto"
+          mb={[20, null, 0]}
+          pb={[0, null, 12]}
+        >
           {children}
         </Box>
         <NavMobile onSearchOpen={onOpen} />

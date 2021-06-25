@@ -5,26 +5,30 @@ import { NextRouter } from 'next/dist/client/router';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { Hydrate } from 'react-query/hydration';
 import theme from 'styles/theme';
 import 'swiper/swiper.min.css';
-import 'swiper/components/navigation/navigation.min.css';
+import 'styles/swiperScrollbar.css';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  const queryClient = new QueryClient();
+  const [queryClient] = useState(() => new QueryClient());
   return (
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider theme={theme}>
-        <Layout>
-          <QueryErrorBoundary>
-            <Component {...pageProps} />
-          </QueryErrorBoundary>
-        </Layout>
-      </ChakraProvider>
+      <Hydrate state={pageProps.dehydratedState}>
+        <ChakraProvider theme={theme}>
+          <Layout>
+            <QueryErrorBoundary>
+              <Component {...pageProps} />
+            </QueryErrorBoundary>
+          </Layout>
+        </ChakraProvider>
+      </Hydrate>
     </QueryClientProvider>
   );
 };

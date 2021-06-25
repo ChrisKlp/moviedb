@@ -3,12 +3,12 @@ import useSwiperRef from 'lib/useSwiperRef';
 import Link from 'next/link';
 import React from 'react';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-import SwiperCore, { Navigation } from 'swiper/core';
+import SwiperCore, { Navigation, Scrollbar } from 'swiper/core';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { TCast } from 'types/castTypes';
 import CastCard from './CastCard';
 
-SwiperCore.use([Navigation]);
+SwiperCore.use([Navigation, Scrollbar]);
 
 type SwiperCastListProps = {
   data: TCast[];
@@ -40,6 +40,7 @@ const SwiperCastList: React.FC<SwiperCastListProps> = ({ data, heading }) => {
           spaceBetween={20}
           slidesPerView={2}
           freeMode={true}
+          scrollbar
           breakpoints={{
             '375': {
               slidesPerView: 3,
@@ -75,10 +76,11 @@ const SwiperCastList: React.FC<SwiperCastListProps> = ({ data, heading }) => {
               </Link>
             </SwiperSlide>
           ))}
+          <Box h={8} />
         </Swiper>
         <IconButton
           position="absolute"
-          top="32%"
+          bottom="calc(50% + 20px)"
           left="-20px"
           icon={<MdKeyboardArrowLeft size={20} />}
           ref={prevElRef}
@@ -92,7 +94,7 @@ const SwiperCastList: React.FC<SwiperCastListProps> = ({ data, heading }) => {
         </IconButton>
         <IconButton
           position="absolute"
-          top="32%"
+          bottom="calc(50% + 20px)"
           right="-20px"
           icon={<MdKeyboardArrowRight size={20} />}
           ref={nextElRef}

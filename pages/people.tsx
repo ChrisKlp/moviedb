@@ -39,9 +39,6 @@ const PeoplePage: React.FC<PeoplePageProps> = () => {
 
   if (isLoading) return <Loading />;
 
-  console.log(data);
-  console.log(isPreviousData);
-
   return (
     <Container py={8}>
       <HStack justify="space-between">

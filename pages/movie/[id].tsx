@@ -29,8 +29,6 @@ const SingleMoviePage = ({ query }: SingleMoviePageProps) => {
 
   if (dataQuery.some(query => query.isLoading)) return <Loading />;
 
-  console.log(dataQuery);
-
   return (
     <>
       <SinglePageHeader
