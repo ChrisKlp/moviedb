@@ -17,9 +17,9 @@ const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
       <AspectRatio ratio={2 / 3} mb={4}>
         <Box
           bg="gray.700"
-          bgImage={`url('${bgImage}')`}
           bgSize="cover"
           bgPosition="center"
+          bgImage={`url('${bgImage}')`}
           rounded="md"
           h={64}
           w="full"

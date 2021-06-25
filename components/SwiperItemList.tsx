@@ -75,8 +75,8 @@ const SwiperItemList: React.FC<SwiperItemListProps> = ({
             },
           }}
         >
-          {data.map(item => (
-            <SwiperSlide key={item.id}>
+          {data.map((item, index) => (
+            <SwiperSlide key={`${index}_${item.id}`}>
               <Link href={`/${item.media_type || category}/${item.id}`}>
                 <a>
                   <ItemCard data={item} />

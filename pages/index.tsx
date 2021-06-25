@@ -6,8 +6,7 @@ import { uniqBy } from 'lodash';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 
-const HomePage: React.FC = props => {
-  console.log(props);
+const HomePage: React.FC = () => {
   const dataQuery = useQueriesTyped([
     { queryKey: 'trendingAll', queryFn: () => fetcher('/trending/all/day') },
     { queryKey: 'genresMovie', queryFn: () => fetcher('/genre/movie/list') },
@@ -49,7 +48,7 @@ const HomePage: React.FC = props => {
 
 export default HomePage;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery('trendingAll', () =>
@@ -66,5 +65,6 @@ export async function getServerSideProps() {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
+    revalidate: 10,
   };
 }
