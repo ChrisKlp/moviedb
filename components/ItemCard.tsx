@@ -14,7 +14,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
 
   return (
     <Box w="full">
-      <AspectRatio ratio={2 / 3} mb={4}>
+      <AspectRatio ratio={2 / 3} mb={4} maxH="315px">
         <Box
           bg="gray.700"
           bgSize="cover"
