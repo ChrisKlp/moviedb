@@ -38,11 +38,20 @@ const SwiperItemList: React.FC<SwiperItemListProps> = ({
             prevEl,
             nextEl,
           }}
+          onInit={swiper => {
+            //@ts-ignore
+            swiper.params.navigation.prevEl = prevEl;
+            //@ts-ignore
+            swiper.params.navigation.nextEl = nextEl;
+            swiper.navigation.update();
+          }}
           spaceBetween={20}
-          slidesPerView={2}
           freeMode={true}
           scrollbar
           breakpoints={{
+            '0': {
+              slidesPerView: 2,
+            },
             '480': {
               slidesPerView: 3,
             },
