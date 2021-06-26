@@ -27,10 +27,10 @@ const SwiperItemList: React.FC<SwiperItemListProps> = ({
   category,
   loading,
 }) => {
+  if (loading) return <SwiperSkeletonList />;
+
   const [nextEl, nextElRef] = useSwiperRef<HTMLButtonElement>();
   const [prevEl, prevElRef] = useSwiperRef<HTMLButtonElement>();
-
-  if (loading) return <SwiperSkeletonList />;
 
   return (
     <Box py={8}>
