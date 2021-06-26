@@ -8,7 +8,6 @@ import { dehydrate } from 'react-query/hydration';
 
 const HomePage: React.FC = props => {
   //@ts-ignore
-  const { results } = props.dehydratedState.queries[0].state.data;
   const dataQuery = useQueriesTyped([
     { queryKey: 'trendingAll', queryFn: () => fetcher('/trending/all/day') },
     { queryKey: 'genresMovie', queryFn: () => fetcher('/genre/movie/list') },
@@ -28,9 +27,12 @@ const HomePage: React.FC = props => {
           'id'
         )}
       />
-      {/* <Container>
-        <SwiperItemList heading="Trending Today" data={results.slice(1)} />
+      <Container>
         <SwiperItemList
+          heading="Trending Today"
+          data={dataQuery[0].data.results}
+        />
+        {/* <SwiperItemList
           heading="Upcoming Movies"
           category="movie"
           data={dataQuery[3].data.results}
@@ -39,8 +41,8 @@ const HomePage: React.FC = props => {
           heading="Popular on TV"
           category="tv"
           data={dataQuery[4].data.results}
-        />
-      </Container> */}
+        /> */}
+      </Container>
     </>
   );
 };
