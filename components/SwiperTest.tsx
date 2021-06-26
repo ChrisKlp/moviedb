@@ -69,37 +69,7 @@ const SwiperTest: React.FC = () => {
         Test
       </Heading>
       <Box position="relative">
-        <Swiper
-          spaceBetween={20}
-          slidesPerView={2}
-          freeMode={true}
-          scrollbar
-          breakpoints={{
-            '480': {
-              slidesPerView: 3,
-            },
-            '768': {
-              slidesPerView: 4,
-              slidesPerGroup: 4,
-              freeMode: false,
-            },
-            '1024': {
-              slidesPerView: 5,
-              slidesPerGroup: 5,
-              freeMode: false,
-            },
-            '1280': {
-              slidesPerView: 6,
-              slidesPerGroup: 6,
-              freeMode: false,
-            },
-            '1440': {
-              slidesPerView: 8,
-              slidesPerGroup: 8,
-              freeMode: false,
-            },
-          }}
-        >
+        <Swiper spaceBetween={20} slidesPerView={8} freeMode={true} scrollbar>
           {data.map((item, index) => (
             <SwiperSlide key={`${index}_${item.name}`}>
               <Link href={`/movies`}>
