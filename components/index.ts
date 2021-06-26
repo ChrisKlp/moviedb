@@ -4,6 +4,7 @@ export { default as ItemCard } from 'components/ItemCard';
 export { default as CastCard } from 'components/CastCard';
 export { default as SwiperItemList } from 'components/SwiperItemList';
 export { default as SwiperCastList } from 'components/SwiperCastList';
+export { default as SwiperSkeletonList } from 'components/SwiperSkeletonList';
 export { default as SinglePageHeader } from 'components/SinglePageHeader';
 export { default as Loading } from 'components/Loading';
 export { default as QueryErrorBoundary } from 'components/QueryErrorBoundary';

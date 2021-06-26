@@ -1,6 +1,5 @@
 import { Container } from '@chakra-ui/react';
-import { Loading, Hero, SwiperItemList } from 'components';
-import SwiperTest from 'components/SwiperTest';
+import { Hero, Loading, SwiperItemList } from 'components';
 import fetcher from 'lib/fetcher';
 import { useQueriesTyped } from 'lib/useQueriesTyped';
 import { uniqBy } from 'lodash';
@@ -8,7 +7,6 @@ import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 
 const HomePage: React.FC = props => {
-  //@ts-ignore
   const dataQuery = useQueriesTyped([
     { queryKey: 'trendingAll', queryFn: () => fetcher('/trending/all/day') },
     { queryKey: 'genresMovie', queryFn: () => fetcher('/genre/movie/list') },
@@ -29,21 +27,23 @@ const HomePage: React.FC = props => {
         )}
       />
       <Container pb={8}>
-        <SwiperTest />
         <SwiperItemList
+          loading={dataQuery[0].isFetching}
           heading="Trending Today"
-          data={dataQuery[0].data.results}
+          data={dataQuery[0].data.results.slice(1)}
         />
-        {/* <SwiperItemList
+        <SwiperItemList
+          loading={dataQuery[0].isFetching}
           heading="Upcoming Movies"
           category="movie"
           data={dataQuery[3].data.results}
         />
         <SwiperItemList
+          loading={dataQuery[0].isFetching}
           heading="Popular on TV"
           category="tv"
           data={dataQuery[4].data.results}
-        /> */}
+        />
       </Container>
     </>
   );

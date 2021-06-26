@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { TMovieItem } from 'types/movieTypes';
 import { TTvItem } from 'types/tvTypes';
 import ItemCard from './ItemCard';
+import SwiperSkeletonList from './SwiperSkeletonList';
 
 SwiperCore.use([Navigation, Scrollbar]);
 
@@ -17,15 +18,19 @@ type SwiperItemListProps = {
   data: TTrendingAll[];
   heading: string;
   category?: 'movie' | 'tv';
+  loading?: boolean;
 };
 
 const SwiperItemList: React.FC<SwiperItemListProps> = ({
   data,
   heading,
   category,
+  loading,
 }) => {
   const [nextEl, nextElRef] = useSwiperRef<HTMLButtonElement>();
   const [prevEl, prevElRef] = useSwiperRef<HTMLButtonElement>();
+
+  if (loading) return <SwiperSkeletonList />;
 
   return (
     <Box py={8}>
@@ -58,7 +63,7 @@ const SwiperItemList: React.FC<SwiperItemListProps> = ({
               slidesPerGroup: 4,
               freeMode: false,
             },
-            '1024': {
+            '992': {
               slidesPerView: 5,
               slidesPerGroup: 5,
               freeMode: false,
@@ -84,7 +89,7 @@ const SwiperItemList: React.FC<SwiperItemListProps> = ({
               </Link>
             </SwiperSlide>
           ))}
-          <Box h={8} />
+          <Box h={6} />
         </Swiper>
         <IconButton
           position="absolute"
