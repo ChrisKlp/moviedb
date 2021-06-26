@@ -29,7 +29,7 @@ const Header: React.FC<HeaderProps> = ({ onSearchOpen }) => {
               </a>
             </NextLink>
           </Box>
-          <HStack as="nav" spacing={[2, null, 4]}>
+          <HStack as="nav" spacing={[2, null, 4]} display={['none', 'flex']}>
             <Tooltip label="Search" placement="bottom">
               <IconButton
                 onClick={onSearchOpen}
@@ -41,38 +41,45 @@ const Header: React.FC<HeaderProps> = ({ onSearchOpen }) => {
                 aria-label="Search Button"
               />
             </Tooltip>
-            <HStack spacing={[2, null, 4]} display={['none', 'flex']}>
-              {navItems.map(item => (
-                <NextLink href={item.href} key={item.id} passHref>
-                  <Button
-                    as="a"
-                    leftIcon={item.icon}
-                    color="gray.400"
-                    rounded="full"
-                    variant="ghost"
-                    _hover={{ bg: 'gray.700' }}
-                  >
-                    {item.name}
-                  </Button>
-                </NextLink>
-              ))}
-            </HStack>
-            <HStack spacing={[2, null, 4]} display={['flex', 'none']}>
-              {navItems.map(item => (
-                <NextLink href={item.href} key={item.id} passHref>
-                  <IconButton
-                    as="a"
-                    icon={item.icon}
-                    color="gray.400"
-                    rounded="full"
-                    variant="ghost"
-                    _hover={{ bg: 'gray.700' }}
-                    aria-label={item.name}
-                    sx={{ svg: { width: '18px', height: '18px' } }}
-                  />
-                </NextLink>
-              ))}
-            </HStack>
+            {navItems.map(item => (
+              <NextLink href={item.href} key={item.id} passHref>
+                <Button
+                  as="a"
+                  leftIcon={item.icon}
+                  color="gray.400"
+                  rounded="full"
+                  variant="ghost"
+                  _hover={{ bg: 'gray.700' }}
+                >
+                  {item.name}
+                </Button>
+              </NextLink>
+            ))}
+          </HStack>
+          <HStack spacing={[2, null, 4]} display={['flex', 'none']}>
+            <IconButton
+              onClick={onSearchOpen}
+              icon={<GoSearch size={18} />}
+              color="gray.400"
+              rounded="full"
+              variant="ghost"
+              _hover={{ bg: 'gray.700' }}
+              aria-label="Search Button"
+            />
+            {navItems.map(item => (
+              <NextLink href={item.href} key={item.id} passHref>
+                <IconButton
+                  as="a"
+                  icon={item.icon}
+                  color="gray.400"
+                  rounded="full"
+                  variant="ghost"
+                  _hover={{ bg: 'gray.700' }}
+                  aria-label={item.name}
+                  sx={{ svg: { width: '18px', height: '18px' } }}
+                />
+              </NextLink>
+            ))}
           </HStack>
         </Flex>
       </Container>

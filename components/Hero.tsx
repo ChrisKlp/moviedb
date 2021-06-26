@@ -42,7 +42,7 @@ const Hero: React.FC<HeroProps> = ({ data, genres }) => {
     <Flex
       position="relative"
       py={12}
-      h={['calc(100vh - 8.5rem)', null, 'xl']}
+      minH={['calc(100vh - 5rem)', null, 'xl']}
       align="center"
       justify="flex-end"
       bgImage={`url('${

@@ -55,15 +55,15 @@ const Search: React.FC<SearchProps> = ({ isOpen, onClose }) => {
       <ModalContent bg="gray.900" m={0} rounded={0}>
         <ModalCloseButton />
         <ModalBody p={0} m={0}>
-          <Container mt={40}>
+          <Container mt={[20, null, 40]}>
             <Box>
               <Input
                 type="text"
                 variant="flushed"
                 placeholder="Search"
-                fontSize="5xl"
+                fontSize={['xl', null, '5xl']}
                 fontWeight="light"
-                h={20}
+                h={[12, null, 20]}
                 onChange={handleChange}
                 mb={12}
                 ref={initialRef}

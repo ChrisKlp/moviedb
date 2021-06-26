@@ -6,7 +6,9 @@ import { uniqBy } from 'lodash';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 
-const HomePage: React.FC = () => {
+const HomePage: React.FC = props => {
+  //@ts-ignore
+  const { results } = props.dehydratedState.queries[0].state.data;
   const dataQuery = useQueriesTyped([
     { queryKey: 'trendingAll', queryFn: () => fetcher('/trending/all/day') },
     { queryKey: 'genresMovie', queryFn: () => fetcher('/genre/movie/list') },
@@ -27,10 +29,7 @@ const HomePage: React.FC = () => {
         )}
       />
       <Container>
-        <SwiperItemList
-          heading="Trending Today"
-          data={dataQuery[0].data.results.slice(1)}
-        />
+        <SwiperItemList heading="Trending Today" data={results.slice(1)} />
         <SwiperItemList
           heading="Upcoming Movies"
           category="movie"

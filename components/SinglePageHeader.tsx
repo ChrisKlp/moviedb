@@ -37,7 +37,7 @@ const ItemHeader: React.FC<ItemHeaderProps> = ({ data, tvHeader, trailer }) => {
     <Box
       position="relative"
       py={[8, null, 20]}
-      minH={['calc(100vh - 8.5rem)', null, 'auto']}
+      minH={['calc(100vh - 5rem)', null, 'auto']}
       bgImage={`url('${
         data.backdrop_path && genBackdropImage(data.backdrop_path)
       }')`}
