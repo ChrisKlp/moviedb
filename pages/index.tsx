@@ -1,5 +1,6 @@
 import { Container } from '@chakra-ui/react';
 import { Loading, Hero, SwiperItemList } from 'components';
+import SwiperTest from 'components/SwiperTest';
 import fetcher from 'lib/fetcher';
 import { useQueriesTyped } from 'lib/useQueriesTyped';
 import { uniqBy } from 'lodash';
@@ -28,6 +29,7 @@ const HomePage: React.FC = props => {
         )}
       />
       <Container pb={8}>
+        <SwiperTest />
         <SwiperItemList
           heading="Trending Today"
           data={dataQuery[0].data.results}
