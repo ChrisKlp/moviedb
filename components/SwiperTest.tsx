@@ -6,17 +6,14 @@ import {
   HStack,
   Icon,
   Text,
-  IconButton,
 } from '@chakra-ui/react';
-import useSwiperRef from 'lib/useSwiperRef';
 import Link from 'next/link';
 import React from 'react';
 import { BsStarFill } from 'react-icons/bs';
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-import SwiperCore, { Navigation, Scrollbar } from 'swiper/core';
+import SwiperCore, { Scrollbar } from 'swiper/core';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-SwiperCore.use([Navigation, Scrollbar]);
+SwiperCore.use([Scrollbar]);
 
 type TData = {
   name: string;
@@ -66,9 +63,6 @@ const TestItem: React.FC<TestProps> = ({ data }) => {
 };
 
 const SwiperTest: React.FC = () => {
-  const [nextEl, nextElRef] = useSwiperRef<HTMLButtonElement>();
-  const [prevEl, prevElRef] = useSwiperRef<HTMLButtonElement>();
-
   return (
     <Box py={8}>
       <Heading fontSize="xl" fontWeight="semibold" color="teal.300" mb={6}>
@@ -76,17 +70,6 @@ const SwiperTest: React.FC = () => {
       </Heading>
       <Box position="relative">
         <Swiper
-          navigation={{
-            prevEl,
-            nextEl,
-          }}
-          onInit={swiper => {
-            //@ts-ignore
-            swiper.params.navigation.prevEl = prevEl;
-            //@ts-ignore
-            swiper.params.navigation.nextEl = nextEl;
-            swiper.navigation.update();
-          }}
           spaceBetween={20}
           slidesPerView={2}
           freeMode={true}
@@ -128,34 +111,6 @@ const SwiperTest: React.FC = () => {
           ))}
           <Box h={8} />
         </Swiper>
-        <IconButton
-          position="absolute"
-          bottom="calc(50% + 20px)"
-          left="-20px"
-          icon={<MdKeyboardArrowLeft size={20} />}
-          ref={prevElRef}
-          aria-label="prev button"
-          rounded="full"
-          colorScheme="teal"
-          zIndex="docked"
-          display={['none', null, 'inline-flex']}
-        >
-          left
-        </IconButton>
-        <IconButton
-          position="absolute"
-          bottom="calc(50% + 20px)"
-          right="-20px"
-          icon={<MdKeyboardArrowRight size={20} />}
-          ref={nextElRef}
-          aria-label="next button"
-          rounded="full"
-          colorScheme="teal"
-          zIndex="docked"
-          display={['none', null, 'inline-flex']}
-        >
-          right
-        </IconButton>
       </Box>
     </Box>
   );
