@@ -28,7 +28,7 @@ const HomePage: React.FC = props => {
           'id'
         )}
       />
-      <Container>
+      {/* <Container>
         <SwiperItemList heading="Trending Today" data={results.slice(1)} />
         <SwiperItemList
           heading="Upcoming Movies"
@@ -40,7 +40,7 @@ const HomePage: React.FC = props => {
           category="tv"
           data={dataQuery[4].data.results}
         />
-      </Container>
+      </Container> */}
     </>
   );
 };
