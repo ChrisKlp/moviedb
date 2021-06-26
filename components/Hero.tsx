@@ -42,7 +42,7 @@ const Hero: React.FC<HeroProps> = ({ data, genres }) => {
     <Flex
       position="relative"
       py={12}
-      minH={['calc(100vh - 5rem)', null, 'xl']}
+      minH={['lg', null, 'xl']}
       align="center"
       justify="flex-end"
       bgImage={`url('${
@@ -70,7 +70,7 @@ const Hero: React.FC<HeroProps> = ({ data, genres }) => {
           align="flex-start"
           spacing={2}
           maxW={[null, null, '50%']}
-          ml={[0, 0, 'auto']}
+          ml={[0, null, 'auto']}
         >
           <Heading color="white" fontSize={44} lineHeight="none">
             {data.title || data.original_name}

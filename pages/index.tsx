@@ -27,7 +27,7 @@ const HomePage: React.FC = props => {
           'id'
         )}
       />
-      <Container>
+      <Container pb={8}>
         <SwiperItemList
           heading="Trending Today"
           data={dataQuery[0].data.results}

@@ -35,7 +35,7 @@ const SingleMoviePage = ({ query }: SingleMoviePageProps) => {
         data={dataQuery[0].data}
         trailer={dataQuery[2].data.results[0]}
       />
-      <Container>
+      <Container pb={8}>
         <SwiperCastList
           heading="Cast"
           data={dataQuery[1].data.cast.slice(0, 15)}

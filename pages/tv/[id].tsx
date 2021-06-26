@@ -28,7 +28,7 @@ const SingleTvPage = ({ query }: SingleTvPageProps) => {
   return (
     <>
       <SinglePageHeader data={dataQuery[0].data} tvHeader />
-      <Container>
+      <Container pb={8}>
         <SwiperCastList
           heading="Cast"
           data={dataQuery[1].data.cast.slice(0, 15)}
