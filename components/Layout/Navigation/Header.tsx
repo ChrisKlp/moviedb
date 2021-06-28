@@ -6,11 +6,11 @@ import {
   HStack,
   Icon,
   IconButton,
-  Tooltip,
 } from '@chakra-ui/react';
 import { Logo } from 'components/Icons';
 import NextLink from 'next/link';
 import { GoSearch } from 'react-icons/go';
+import { useQueryClient } from 'react-query';
 import navItems from './navItems';
 
 type HeaderProps = {
@@ -18,6 +18,13 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ onSearchOpen }) => {
+  const queryClient = useQueryClient();
+
+  const handleSearchOpen = () => {
+    queryClient.removeQueries('search', { exact: true });
+    onSearchOpen();
+  };
+
   return (
     <Box as="header" h={20} w="full" bg="gray.900">
       <Container>
@@ -30,17 +37,15 @@ const Header: React.FC<HeaderProps> = ({ onSearchOpen }) => {
             </NextLink>
           </Box>
           <HStack as="nav" spacing={[2, null, 4]} display={['none', 'flex']}>
-            <Tooltip label="Search" placement="bottom">
-              <IconButton
-                onClick={onSearchOpen}
-                icon={<GoSearch size={18} />}
-                color="gray.400"
-                rounded="full"
-                variant="ghost"
-                _hover={{ bg: 'gray.700' }}
-                aria-label="Search Button"
-              />
-            </Tooltip>
+            <IconButton
+              onClick={handleSearchOpen}
+              icon={<GoSearch size={18} />}
+              color="gray.400"
+              rounded="full"
+              variant="ghost"
+              _hover={{ bg: 'gray.700' }}
+              aria-label="Search Button"
+            />
             {navItems.map(item => (
               <NextLink href={item.href} key={item.id} passHref>
                 <Button
@@ -58,7 +63,7 @@ const Header: React.FC<HeaderProps> = ({ onSearchOpen }) => {
           </HStack>
           <HStack spacing={[2, null, 4]} display={['flex', 'none']}>
             <IconButton
-              onClick={onSearchOpen}
+              onClick={handleSearchOpen}
               icon={<GoSearch size={18} />}
               color="gray.400"
               rounded="full"

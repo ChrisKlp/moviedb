@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Container,
   Flex,
   Heading,
@@ -13,14 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { genBackdropImage, genPosterImage } from 'lib/generateImages';
 import React from 'react';
-import {
-  BsClockFill,
-  BsDot,
-  BsLink45Deg,
-  BsPlay,
-  BsStarFill,
-} from 'react-icons/bs';
-import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
+import { BsClockFill, BsDot, BsLink45Deg, BsStarFill } from 'react-icons/bs';
 import { TTrailer } from 'types/commonTypes';
 import { TSingleMovie } from 'types/movieTypes';
 import { TSingleTV } from 'types/tvTypes';
@@ -122,16 +114,6 @@ const ItemHeader: React.FC<ItemHeaderProps> = ({ data, tvHeader, trailer }) => {
             </Text>
             <Text>{data.overview}</Text>
             <HStack mt={6} spacing={4}>
-              <Tooltip label="Mark as favorite" placement="bottom">
-                <IconButton
-                  icon={
-                    <MdFavoriteBorder size={20} /> || <MdFavorite size={20} />
-                  }
-                  aria-label="like button"
-                  rounded="full"
-                  size="lg"
-                />
-              </Tooltip>
               <Tooltip label="Visit Homepage" placement="bottom">
                 <IconButton
                   as="a"
