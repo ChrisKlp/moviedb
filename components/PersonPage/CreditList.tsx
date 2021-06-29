@@ -1,4 +1,4 @@
-import { Divider, HStack, Link, Text, VStack } from '@chakra-ui/react';
+import { Divider, HStack, Link, Text, VStack, Box } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { TPersonCast } from 'types/castTypes';
@@ -24,18 +24,21 @@ const CreditList: React.FC<CreditListProps> = ({ data }) => {
     <VStack spacing={4} align="flex-start">
       {data.map((item, index) => (
         <React.Fragment key={`${index}-${item.id}`}>
-          <HStack spacing={4}>
+          <HStack spacing={4} align="flex-start">
             <Text w={10} textAlign="center">
               {generateDate(item)}
             </Text>
-            <NextLink href={`/movie/${item.id}`} passHref>
-              <Link _hover={{ color: 'teal.400' }}>
-                {item.title || item.name}
-              </Link>
-            </NextLink>
-            <Text fontSize="sm" color="gray.500">
-              as {item.character}
-            </Text>
+            <Box>
+              <NextLink href={`/movie/${item.id}`} passHref>
+                <Link _hover={{ color: 'teal.400' }}>
+                  {item.title || item.name}
+                </Link>
+              </NextLink>
+              <Text as="span" fontSize="sm" color="gray.500">
+                {' '}
+                as {item.character}
+              </Text>
+            </Box>
           </HStack>
           <Divider />
         </React.Fragment>

@@ -59,7 +59,7 @@ const SwiperSkeletonList: React.FC = () => {
       <Box position="relative">
         <Grid
           gap={5}
-          templateRow={1}
+          templateRows="1fr"
           autoFlow="column"
           autoColumns={[
             'calc(50% - 10px)',
