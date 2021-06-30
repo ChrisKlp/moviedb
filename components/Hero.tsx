@@ -51,6 +51,9 @@ const Hero: React.FC<HeroProps> = ({ data, genres }) => {
       bgSize="cover"
       bgPosition="center"
       zIndex={0}
+      maxW="1440px"
+      mx="auto"
+      rounded={{ '2xl': 8 }}
     >
       <Box
         position="absolute"
@@ -61,7 +64,7 @@ const Hero: React.FC<HeroProps> = ({ data, genres }) => {
         bgGradient={[
           'linear(to-b, rgba(0,0,0,0), gray.900)',
           null,
-          'linear(to-r, rgba(0,0,0,0), gray.900)',
+          'linear(to-r, rgba(0,0,0,0), rgba(23, 25, 35, 0.9))',
         ]}
         zIndex={-1}
       />
