@@ -34,7 +34,7 @@ const Hero: React.FC<HeroProps> = ({ data, genres }) => {
     fetcher(`/movie/${data.id}/videos`)
   );
 
-  const filteredGenres = _.filter(genres, o =>
+  const filteredGenres = _.filter(genres, (o) =>
     _.includes(data.genre_ids, o.id)
   );
 
@@ -87,7 +87,7 @@ const Hero: React.FC<HeroProps> = ({ data, genres }) => {
             </HStack>
             <Icon as={BsDot} color="gray.300" />
             <Text fontSize="sm" color="gray.300">
-              {filteredGenres.map(genre => genre.name).join(', ')}
+              {filteredGenres.map((genre) => genre.name).join(', ')}
             </Text>
           </HStack>
           <Text fontSize="sm" pb={6}>
@@ -99,7 +99,7 @@ const Hero: React.FC<HeroProps> = ({ data, genres }) => {
                 View more
               </Button>
             </Link>
-            {!isLoading && trailerData.results[0] && (
+            {!isLoading && trailerData.results && trailerData.results[0] && (
               <Trailer data={trailerData.results[0].key} />
             )}
           </HStack>

@@ -1,8 +1,7 @@
-import { Box, Container } from '@chakra-ui/react';
-import { SwiperCastList, Loading, SinglePageHeader } from 'components';
+import { Container } from '@chakra-ui/react';
+import { Loading, SinglePageHeader, SwiperCastList } from 'components';
 import fetcher from 'lib/fetcher';
 import { useQueriesTyped } from 'lib/useQueriesTyped';
-import _ from 'lodash';
 import React from 'react';
 
 type SingleMoviePageProps = {
@@ -27,7 +26,7 @@ const SingleMoviePage = ({ query }: SingleMoviePageProps) => {
     },
   ]);
 
-  if (dataQuery.some(query => query.isLoading)) return <Loading />;
+  if (dataQuery.some((query) => query.isLoading)) return <Loading />;
 
   return (
     <>

@@ -6,7 +6,7 @@ import { uniqBy } from 'lodash';
 import { QueryClient } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 
-const HomePage: React.FC = props => {
+const HomePage: React.FC = (props) => {
   const dataQuery = useQueriesTyped([
     { queryKey: 'trendingAll', queryFn: () => fetcher('/trending/all/day') },
     { queryKey: 'genresMovie', queryFn: () => fetcher('/genre/movie/list') },
@@ -15,7 +15,7 @@ const HomePage: React.FC = props => {
     { queryKey: 'tvPopular', queryFn: () => fetcher('/tv/popular') },
   ]);
 
-  if (dataQuery.some(query => query.isLoading)) return <Loading />;
+  if (dataQuery.some((query) => query.isLoading)) return <Loading />;
 
   return (
     <>
